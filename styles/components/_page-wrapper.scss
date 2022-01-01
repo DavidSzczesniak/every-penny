@@ -1,0 +1,14 @@
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.box-container {
+    border: 1px solid $clr-border;
+    height: 500px;
+    background: white;
+    border-radius: 1.5rem;
+    margin-top: $md-size;
+    text-align: center;
+}

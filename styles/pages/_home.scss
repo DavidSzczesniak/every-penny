@@ -1,0 +1,32 @@
+.homepage {
+    display: flex;
+    justify-content: space-between;
+
+    h1 {
+        font-size: 72px;
+        margin-bottom: 0;
+        span {
+            background: linear-gradient(
+                90deg,
+                rgba(17, 101, 48, 1) 0%,
+                rgba(24, 165, 88, 1) 35%,
+                rgba(33, 182, 168, 1) 100%
+            );
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    }
+}
+
+.homepage__content {
+    font-size: 2rem;
+    flex: 2;
+}
+
+.homepage__image {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

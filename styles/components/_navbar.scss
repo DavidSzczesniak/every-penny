@@ -1,0 +1,41 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.navbar__logo {
+    display: flex;
+    align-items: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    &:hover {
+        cursor: pointer;
+    }
+
+    span {
+        margin-left: 0.6rem;
+        color: $green;
+    }
+
+    svg {
+        margin-right: 0.75rem;
+        width: $xl-size;
+        height: $xl-size;
+        fill: $green;
+    }
+}
+
+.navbar__links {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 500;
+
+    a {
+        margin-right: $sm-size;
+        &:hover {
+            color: $green;
+        }
+    }
+}
