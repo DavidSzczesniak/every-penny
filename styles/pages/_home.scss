@@ -1,10 +1,8 @@
 .homepage {
-    display: flex;
-    justify-content: space-between;
-
     h1 {
-        font-size: 72px;
-        margin-bottom: 0;
+        font-size: 4.5rem;
+        margin: 0;
+
         span {
             background: linear-gradient(
                 90deg,
@@ -16,17 +14,56 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
+        @media (min-width: $tablet-breakpoint) {
+            font-size: 7rem;
+        }
+    }
+}
+
+.homepage__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+
+    @media (min-width: $desktop-breakpoint) {
+        flex-direction: row;
+    }
+}
+
+.homepage__image {
+    display: flex;
+    justify-content: center;
+    margin: $lg-size 0;
+
+    @media (min-width: $tablet-breakpoint) {
+        img {
+            height: 310px !important;
+            width: 375px !important;
+        }
+    }
+
+    @media (min-width: $desktop-breakpoint) {
+        margin: 0;
+
+        img {
+            height: 410px !important;
+            width: 475px !important;
+        }
     }
 }
 
 .homepage__content {
     font-size: 2rem;
-    flex: 2;
-}
+    text-align: center;
 
-.homepage__image {
-    flex: 2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @media (min-width: $desktop-breakpoint) {
+        text-align: left;
+        margin-top: -$md-size;
+
+        p {
+            width: 50%;
+        }
+    }
 }

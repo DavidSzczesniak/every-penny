@@ -1,5 +1,5 @@
 import React from 'react';
-import { CurrencyDollarIcon } from '@heroicons/react/solid';
+import { CurrencyDollarIcon, MenuIcon } from '@heroicons/react/solid';
 import Link from 'next/link';
 
 const Navbar = () => (
@@ -15,6 +15,11 @@ const Navbar = () => (
             <Link href="/list">Expenses List</Link>
             <button className="button" style={{ marginLeft: '3rem' }}>
                 Sign Up
+            </button>
+        </div>
+        <div className="navbar__hamburger">
+            <button className="button button--icon">
+                <MenuIcon />
             </button>
         </div>
     </div>

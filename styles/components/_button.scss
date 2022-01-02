@@ -18,3 +18,27 @@
 .button--secondary {
     background: #888;
 }
+
+.button--icon {
+    background: none;
+    padding-right: 0;
+
+    &:hover {
+        background: none;
+    }
+
+    svg {
+        fill: black;
+        width: $lg-size;
+        height: $lg-size;
+        &:hover {
+            fill: $green;
+        }
+    }
+}
+
+.button--body {
+    @media (max-width: ($tablet-breakpoint - 1)) {
+        width: 100%;
+    }
+}

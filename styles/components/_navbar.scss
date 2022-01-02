@@ -1,13 +1,16 @@
-.navbar {
+div.navbar {
     display: flex;
     justify-content: space-between;
-    width: 100%;
+
+    @media (min-width: $desktop-breakpoint) {
+        margin-bottom: $lg-size;
+    }
 }
 
 .navbar__logo {
     display: flex;
     align-items: center;
-    font-size: 2.5rem;
+    font-size: 2.25rem;
     font-weight: 700;
     &:hover {
         cursor: pointer;
@@ -20,16 +23,14 @@
 
     svg {
         margin-right: 0.75rem;
-        width: $xl-size;
-        height: $xl-size;
+        width: $lg-size;
+        height: $lg-size;
         fill: $green;
     }
 }
 
 .navbar__links {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: none;
     font-weight: 500;
 
     a {
@@ -37,5 +38,21 @@
         &:hover {
             color: $green;
         }
+    }
+
+    @media (min-width: $desktop-breakpoint) {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+.navbar__hamburger {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    @media (min-width: $desktop-breakpoint) {
+        display: none;
     }
 }
