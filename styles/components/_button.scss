@@ -1,5 +1,5 @@
 .button {
-    background: $green;
+    background: $dark-green;
     color: white;
     font-family: 'Poppins', sans-serif;
     font-size: $md-size;
@@ -11,7 +11,7 @@
     text-decoration: none;
     line-height: 1;
     &:hover {
-        background: darken($green, 10%);
+        background: lighten($dark-green, 10%);
     }
 }
 

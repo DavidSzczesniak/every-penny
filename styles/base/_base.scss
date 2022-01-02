@@ -13,6 +13,7 @@ body {
     font-size: $md-size;
     line-height: 1.6;
     margin: 0;
+    background: $neon-green;
 }
 
 button {
@@ -37,8 +38,12 @@ a.active {
     position: relative;
 }
 
-.blob {
+.page-divider {
     position: absolute;
     z-index: -1;
-    top: 20vh;
+    top: 0;
+    height: 60%;
+    width: 100%;
+    background: white;
+    border-bottom-left-radius: 50%;
 }

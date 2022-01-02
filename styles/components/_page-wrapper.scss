@@ -19,7 +19,8 @@
 
 .box-container {
     border: 1px solid $clr-border;
-    height: 500px;
+    border-top: 3px solid $green;
+    border-bottom: 3px solid $green;
     background: white;
     border-radius: 1.5rem;
     margin-top: $md-size;

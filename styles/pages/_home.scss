@@ -4,15 +4,7 @@
         margin: 0;
 
         span {
-            background: linear-gradient(
-                90deg,
-                rgba(17, 101, 48, 1) 0%,
-                rgba(24, 165, 88, 1) 35%,
-                rgba(33, 182, 168, 1) 100%
-            );
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: $green;
         }
 
         @media (min-width: $tablet-breakpoint) {
@@ -29,6 +21,8 @@
 
     @media (min-width: $desktop-breakpoint) {
         flex-direction: row;
+        align-items: flex-start;
+        flex: 3;
     }
 }
 
@@ -36,11 +30,12 @@
     display: flex;
     justify-content: center;
     margin: $lg-size 0;
+    flex: 1;
 
     @media (min-width: $tablet-breakpoint) {
         img {
-            height: 310px !important;
-            width: 375px !important;
+            height: 410px !important;
+            width: 275px !important;
         }
     }
 
@@ -48,22 +43,53 @@
         margin: 0;
 
         img {
-            height: 410px !important;
-            width: 475px !important;
+            height: 550px !important;
+            width: 350px !important;
         }
     }
 }
 
-.homepage__content {
+.homepage__tagline {
     font-size: 2rem;
     text-align: center;
 
     @media (min-width: $desktop-breakpoint) {
         text-align: left;
-        margin-top: -$md-size;
+        margin-top: -20rem;
 
         p {
             width: 50%;
         }
+    }
+}
+
+.homepage__content {
+    margin: 5rem 0;
+
+    .app-feature {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: $lg-size;
+        border-top: 3px solid $green;
+        border-bottom: 3px solid $green;
+        margin-top: 5rem;
+
+        @media (min-width: $tablet-breakpoint) {
+            margin: 5rem 2rem 0;
+            flex-grow: 1;
+            max-width: 32rem;
+        }
+    }
+
+    .app-feature__text {
+        text-align: center;
+    }
+
+    @media (min-width: $tablet-breakpoint) {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
     }
 }
