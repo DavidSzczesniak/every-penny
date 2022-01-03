@@ -3,6 +3,7 @@ import Sidebar from 'components/Sidebar';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import 'styles/styles.scss';
+import { disableScrolling, enableScrolling } from 'utils/utils';
 
 function MyApp({ Component, pageProps }) {
     const [sidebarOpen, setSidebar] = useState(false);
@@ -11,9 +12,15 @@ function MyApp({ Component, pageProps }) {
     router.events &&
         router.events.on('routeChangeComplete', (url) => {
             setSidebar(false);
+            enableScrolling();
         });
 
     const toggleSidebar = () => {
+        if (sidebarOpen) {
+            enableScrolling();
+        } else {
+            disableScrolling();
+        }
         setSidebar(!sidebarOpen);
     };
 
