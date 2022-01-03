@@ -40,19 +40,23 @@ div.navbar {
         }
     }
 
-    @media (min-width: $desktop-breakpoint) {
+    button {
+        margin-left: $lg-size;
+    }
+
+    @media (min-width: $tablet-breakpoint) {
         display: flex;
         align-items: center;
         justify-content: space-between;
     }
 }
 
-.navbar__hamburger {
+.navbar__button {
     display: flex;
     align-items: center;
     justify-content: flex-end;
 
-    @media (min-width: $desktop-breakpoint) {
+    @media (min-width: $tablet-breakpoint) {
         display: none;
     }
 }

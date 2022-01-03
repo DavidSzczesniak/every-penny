@@ -1,0 +1,9 @@
+.box-container {
+    border: 1px solid $clr-border;
+    border-top: 3px solid $green;
+    border-bottom: 3px solid $green;
+    background: white;
+    border-radius: 1.5rem;
+    margin-top: $md-size;
+    text-align: center;
+}

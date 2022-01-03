@@ -2,7 +2,7 @@ import React from 'react';
 import { CurrencyDollarIcon, MenuIcon } from '@heroicons/react/solid';
 import Link from 'next/link';
 
-const Navbar = () => (
+const Navbar = ({ toggleSidebar }) => (
     <div className="navbar content-container">
         <Link href="/" passHref>
             <div className="navbar__logo">
@@ -13,12 +13,10 @@ const Navbar = () => (
         <div className="navbar__links">
             <Link href="/dashboard">Dashboard</Link>
             <Link href="/list">Expenses List</Link>
-            <button className="button" style={{ marginLeft: '3rem' }}>
-                Sign Up
-            </button>
+            <button className="button">Sign Up</button>
         </div>
-        <div className="navbar__hamburger">
-            <button className="button button--icon">
+        <div className="navbar__button">
+            <button className="button button--icon" onClick={toggleSidebar}>
                 <MenuIcon />
             </button>
         </div>

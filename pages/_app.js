@@ -1,11 +1,29 @@
 import Navbar from 'components/Navbar';
-import React from 'react';
+import Sidebar from 'components/Sidebar';
+import { useRouter } from 'next/router';
+import React, { useState } from 'react';
 import 'styles/styles.scss';
 
 function MyApp({ Component, pageProps }) {
+    const [sidebarOpen, setSidebar] = useState(false);
+    const router = useRouter();
+
+    router.events &&
+        router.events.on('routeChangeComplete', (url) => {
+            setSidebar(false);
+        });
+
+    const toggleSidebar = () => {
+        setSidebar(!sidebarOpen);
+    };
+
     return (
         <div>
-            <Navbar />
+            {sidebarOpen ? (
+                <Sidebar toggleSidebar={toggleSidebar} />
+            ) : (
+                <Navbar toggleSidebar={toggleSidebar} />
+            )}
             <div className="layout-wrapper">
                 <div className="content-container">
                     <Component {...pageProps} />

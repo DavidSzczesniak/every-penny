@@ -10,6 +10,8 @@
     display: inline-block;
     text-decoration: none;
     line-height: 1;
+    max-width: 30rem;
+
     &:hover {
         background: lighten($dark-green, 10%);
     }
@@ -38,8 +40,7 @@
 }
 
 .button--body {
-    @media (max-width: ($tablet-breakpoint - 1)) {
+    @media (max-width: ($desktop-breakpoint - 1)) {
         width: 100%;
-        max-width: 30rem;
     }
 }
