@@ -40,5 +40,6 @@
 .button--body {
     @media (max-width: ($tablet-breakpoint - 1)) {
         width: 100%;
+        max-width: 30rem;
     }
 }
