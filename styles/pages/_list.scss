@@ -1,0 +1,38 @@
+.expenses-list {
+    padding: $lg-size;
+}
+
+.expenses-list__filters {
+    display: flex;
+    flex-direction: column;
+
+    > * {
+        margin-bottom: $md-size;
+
+        @media (min-width: $tablet-breakpoint) {
+            margin-right: $md-size;
+        }
+    }
+
+    @media (min-width: $tablet-breakpoint) {
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+}
+
+.expenses-list__table {
+    margin-top: $lg-size;
+
+    th {
+        &:hover {
+            cursor: pointer;
+            color: $green;
+        }
+
+        svg {
+            height: $md-size;
+            width: $md-size;
+            float: right;
+        }
+    }
+}

@@ -1,3 +1,4 @@
+import { MantineProvider } from '@mantine/core';
 import Navbar from 'components/Navbar';
 import Sidebar from 'components/Sidebar';
 import { useRouter } from 'next/router';
@@ -25,7 +26,10 @@ function MyApp({ Component, pageProps }) {
     };
 
     return (
-        <div>
+        <MantineProvider
+            theme={{
+                fontFamily: 'Poppins, sans-serif',
+            }}>
             {sidebarOpen ? (
                 <Sidebar toggleSidebar={toggleSidebar} />
             ) : (
@@ -37,7 +41,7 @@ function MyApp({ Component, pageProps }) {
                 </div>
             </div>
             <div className="page-divider"></div>
-        </div>
+        </MantineProvider>
     );
 }
 

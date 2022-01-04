@@ -1,6 +1,8 @@
 import { CurrencyDollarIcon, XIcon } from '@heroicons/react/solid';
+import { Button } from '@mantine/core';
 import Link from 'next/link';
 import React from 'react';
+import { customButtonStyles } from 'utils/customButtonStyles';
 
 const Sidebar = ({ toggleSidebar }) => (
     <div className="sidebar">
@@ -12,7 +14,7 @@ const Sidebar = ({ toggleSidebar }) => (
                 </div>
             </Link>
             <div className="navbar__button">
-                <button className="button button--icon" onClick={toggleSidebar}>
+                <button className="icon-button" onClick={toggleSidebar}>
                     <XIcon />
                 </button>
             </div>
@@ -22,7 +24,9 @@ const Sidebar = ({ toggleSidebar }) => (
             <Link href="/list">Expenses List</Link>
         </div>
         <div className="sidebar__login">
-            <button className="button button--body">Sign Up</button>
+            <Button color="green" radius="md" styles={customButtonStyles} size="md">
+                Sign Up
+            </Button>
         </div>
     </div>
 );

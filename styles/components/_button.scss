@@ -1,33 +1,9 @@
-.button {
-    background: $dark-green;
-    color: white;
-    font-family: 'Poppins', sans-serif;
-    font-size: $md-size;
-    font-weight: 500;
-    padding: $sm-size $md-size;
-    border: none;
-    border-radius: 0.75rem;
-    display: inline-block;
-    text-decoration: none;
-    line-height: 1;
-    max-width: 30rem;
-
-    &:hover {
-        background: lighten($dark-green, 10%);
-    }
-}
-
-.button--secondary {
-    background: #888;
-}
-
-.button--icon {
+.icon-button {
     background: none;
-    padding-right: 0;
-
-    &:hover {
-        background: none;
-    }
+    font-size: $md-size;
+    padding: $sm-size 0 $sm-size $md-size;
+    border: none;
+    line-height: 1;
 
     svg {
         fill: black;
@@ -39,8 +15,9 @@
     }
 }
 
-.button--body {
-    @media (max-width: ($desktop-breakpoint - 1)) {
+.mantine-Button-root {
+    @media (max-width: ($tablet-breakpoint - 1)) {
         width: 100%;
+        max-width: 30rem;
     }
 }

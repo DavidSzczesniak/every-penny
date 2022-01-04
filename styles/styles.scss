@@ -1,6 +1,7 @@
-@import './base/settings';
+@import './base/settings.module';
 @import './base/base';
 @import './pages/home';
+@import './pages/list';
 @import './components/navbar';
 @import './components/sidebar';
 @import './components/content-container';
