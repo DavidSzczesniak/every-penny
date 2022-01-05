@@ -1,0 +1,47 @@
+.expense-modal__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h3 {
+        margin: 0;
+    }
+
+    .icon-button svg {
+        width: 2rem;
+        height: 2rem;
+    }
+}
+
+.expense-modal__body {
+    display: flex;
+    flex-direction: column;
+
+    > * {
+        margin-top: $sm-size;
+    }
+
+    > button {
+        align-self: center;
+        margin-top: $lg-size;
+        width: 50%;
+    }
+
+    .inline-fields {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        > :nth-child(2) {
+            margin-top: $sm-size;
+        }
+
+        @media (min-width: $tablet-breakpoint) {
+            flex-direction: row;
+
+            > :nth-child(2) {
+                margin: 0 0 0 $sm-size;
+            }
+        }
+    }
+}
