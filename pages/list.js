@@ -1,13 +1,20 @@
-import { SearchIcon } from '@heroicons/react/solid';
+import { ChevronDownIcon, ChevronUpIcon, SearchIcon } from '@heroicons/react/solid';
 import { Select, Table, TextInput } from '@mantine/core';
 import { DateRangePicker } from '@mantine/dates';
 import PageWrapper from 'components/PageWrapper';
+import { useSortableData } from 'hooks/useSortableData';
 import React from 'react';
 
 const ExpensesList = () => {
     // temporary dummy data
     const elements = [
-        { date: '23/12/21', name: 'Rent', amount: 1095, category: 'Bills', note: 'same as always' },
+        {
+            date: '23/12/21',
+            name: 'Rent',
+            amount: 1095,
+            category: 'Bills',
+            note: 'same as always',
+        },
         { date: '12/12/21', name: 'Food Shop', amount: 135.32, category: 'Food', note: '' },
         {
             date: '02/05/21',
@@ -31,6 +38,7 @@ const ExpensesList = () => {
             note: 'same as always',
         },
     ];
+    const { sortedData, handleSort, sortConfig } = useSortableData(elements);
 
     const TableHeadingsList = [
         {
@@ -49,15 +57,24 @@ const ExpensesList = () => {
             prop: 'category',
             label: 'Category',
         },
-        {
-            prop: 'note',
-            label: 'Note',
-        },
     ];
 
-    const TableHeading = ({ label }) => (
-        <th>
+    const getSortIcon = () => {
+        if (sortConfig.direction === 'ascending') {
+            return <ChevronUpIcon />;
+        }
+
+        if (sortConfig.direction === 'descending') {
+            return <ChevronDownIcon />;
+        }
+
+        return null;
+    };
+
+    const TableHeading = ({ prop, label }) => (
+        <th onClick={() => handleSort(prop)}>
             <span>{label}</span>
+            {sortConfig.key === prop && getSortIcon()}
         </th>
     );
 
@@ -100,13 +117,12 @@ const ExpensesList = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {elements.map((element) => (
+                        {sortedData.map((element) => (
                             <tr key={element.name}>
                                 <td>{element.date}</td>
                                 <td>{element.name}</td>
                                 <td>{element.amount}</td>
                                 <td>{element.category}</td>
-                                <td>{element.note}</td>
                             </tr>
                         ))}
                     </tbody>
