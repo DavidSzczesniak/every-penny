@@ -1,8 +1,10 @@
 import { XIcon } from '@heroicons/react/solid';
-import { Button, Modal, NumberInput, Textarea, TextInput } from '@mantine/core';
+import { Button, Modal, NumberInput, Select, Textarea, TextInput } from '@mantine/core';
 import { DatePicker } from '@mantine/dates';
 import { useForm } from '@mantine/hooks';
-import React from 'react';
+import { categories } from 'config/expensesConfig';
+import { ExpensesContext } from 'context/expensesContext';
+import React, { useContext } from 'react';
 import { customButtonStyles } from 'utils/customButtonStyles';
 
 const AddExpenseModal = ({ opened, setOpened }) => {
@@ -11,6 +13,7 @@ const AddExpenseModal = ({ opened, setOpened }) => {
             title: '',
             amount: 0,
             date: new Date(),
+            category: '',
             note: '',
         },
         validationRules: {
@@ -22,6 +25,13 @@ const AddExpenseModal = ({ opened, setOpened }) => {
             amount: 'Amount is required and should be a number',
         },
     });
+    const { dispatch } = useContext(ExpensesContext);
+
+    const handleSubmit = (values) => {
+        dispatch({ type: 'ADD_EXPENSE', expense: values });
+        form.reset();
+        setOpened(false);
+    };
 
     return (
         <Modal
@@ -38,7 +48,7 @@ const AddExpenseModal = ({ opened, setOpened }) => {
             </div>
             <form
                 className="expense-modal__body"
-                onSubmit={form.onSubmit((values) => console.log(values))}>
+                onSubmit={form.onSubmit((values) => handleSubmit(values))}>
                 <TextInput
                     label="Title"
                     placeholder="What the expense was"
@@ -49,7 +59,6 @@ const AddExpenseModal = ({ opened, setOpened }) => {
                 <div className="inline-fields">
                     <NumberInput
                         label="Amount"
-                        placeholder="How much you paid"
                         step={0.05}
                         precision={2}
                         min={0}
@@ -58,6 +67,14 @@ const AddExpenseModal = ({ opened, setOpened }) => {
                     />
                     <DatePicker label="Date" {...form.getInputProps('date')} clearable={false} />
                 </div>
+                <Select
+                    label="Select category"
+                    placeholder="Select category"
+                    data={categories}
+                    clearable
+                    clearButtonLabel="Clear select field"
+                    {...form.getInputProps('category')}
+                />
                 <Textarea
                     label="Note"
                     placeholder="Add a note (optional)"

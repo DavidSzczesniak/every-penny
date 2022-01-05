@@ -1,14 +1,16 @@
 import { MantineProvider } from '@mantine/core';
 import Navbar from 'components/Navbar';
 import Sidebar from 'components/Sidebar';
+import { ExpensesContext, expensesReducer, initialExpensesState } from 'context/expensesContext';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useReducer, useState } from 'react';
 import 'styles/styles.scss';
 import { disableScrolling, enableScrolling } from 'utils/utils';
 
 function MyApp({ Component, pageProps }) {
     const [sidebarOpen, setSidebar] = useState(false);
     const router = useRouter();
+    const [state, dispatch] = useReducer(expensesReducer, initialExpensesState);
 
     router.events &&
         router.events.on('routeChangeComplete', (url) => {
@@ -30,17 +32,19 @@ function MyApp({ Component, pageProps }) {
             theme={{
                 fontFamily: 'Poppins, sans-serif',
             }}>
-            {sidebarOpen ? (
-                <Sidebar toggleSidebar={toggleSidebar} />
-            ) : (
-                <Navbar toggleSidebar={toggleSidebar} />
-            )}
-            <div className="layout-wrapper">
-                <div className="content-container">
-                    <Component {...pageProps} />
+            <ExpensesContext.Provider value={{ state, dispatch }}>
+                {sidebarOpen ? (
+                    <Sidebar toggleSidebar={toggleSidebar} />
+                ) : (
+                    <Navbar toggleSidebar={toggleSidebar} />
+                )}
+                <div className="layout-wrapper">
+                    <div className="content-container">
+                        <Component {...pageProps} />
+                    </div>
                 </div>
-            </div>
-            <div className="page-divider"></div>
+                <div className="page-divider"></div>
+            </ExpensesContext.Provider>
         </MantineProvider>
     );
 }

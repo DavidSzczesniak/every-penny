@@ -2,62 +2,20 @@ import { ChevronDownIcon, ChevronUpIcon, SearchIcon } from '@heroicons/react/sol
 import { Select, Table, TextInput } from '@mantine/core';
 import { DateRangePicker } from '@mantine/dates';
 import PageWrapper from 'components/PageWrapper';
+import { categories, tableHeadings } from 'config/expensesConfig';
+import { ExpensesContext } from 'context/expensesContext';
+import dayjs from 'dayjs';
 import { useSortableData } from 'hooks/useSortableData';
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
+import { mockExpenses } from 'tests/mocks/expenses';
 
 const ExpensesList = () => {
-    // temporary dummy data
-    const elements = [
-        {
-            date: '23/12/21',
-            name: 'Rent',
-            amount: 1095,
-            category: 'Bills',
-            note: 'same as always',
-        },
-        { date: '12/12/21', name: 'Food Shop', amount: 135.32, category: 'Food', note: '' },
-        {
-            date: '02/05/21',
-            name: 'Headphones',
-            amount: 69.99,
-            category: 'Electronics',
-            note: 'very cool',
-        },
-        {
-            date: '09/08/21',
-            name: 'Water bill',
-            amount: 55.29,
-            category: 'Bills',
-            note: 'same as always',
-        },
-        {
-            date: '31/12/20',
-            name: 'Power bill',
-            amount: 64.98,
-            category: 'Bills',
-            note: 'same as always',
-        },
-    ];
-    const { sortedData, handleSort, sortConfig } = useSortableData(elements);
+    const { state: expensesState, dispatch } = useContext(ExpensesContext);
+    const { sortedData, handleSort, sortConfig } = useSortableData(expensesState);
 
-    const TableHeadingsList = [
-        {
-            prop: 'date',
-            label: 'Date',
-        },
-        {
-            prop: 'name',
-            label: 'Name',
-        },
-        {
-            prop: 'amount',
-            label: 'Amount',
-        },
-        {
-            prop: 'category',
-            label: 'Category',
-        },
-    ];
+    useEffect(() => {
+        dispatch({ type: 'SET_EXPENSES', expenses: mockExpenses });
+    }, [dispatch]);
 
     const getSortIcon = () => {
         if (sortConfig.direction === 'ascending') {
@@ -94,12 +52,7 @@ const ExpensesList = () => {
                     <Select
                         aria-label="Select category"
                         placeholder="Select category"
-                        data={[
-                            { value: 'bills', label: 'Bills' },
-                            { value: 'electronics', label: 'Electronics' },
-                            { value: 'food', label: 'Food' },
-                            { value: 'entertainment', label: 'Entertainment' },
-                        ]}
+                        data={categories}
                         clearable
                         clearButtonLabel="Clear select field"
                     />
@@ -107,7 +60,7 @@ const ExpensesList = () => {
                 <Table className="expenses-list__table" highlightOnHover striped>
                     <thead>
                         <tr>
-                            {TableHeadingsList.map((heading) => (
+                            {tableHeadings.map((heading) => (
                                 <TableHeading
                                     key={heading.prop}
                                     prop={heading.prop}
@@ -118,15 +71,16 @@ const ExpensesList = () => {
                     </thead>
                     <tbody>
                         {sortedData.map((element) => (
-                            <tr key={element.name}>
-                                <td>{element.date}</td>
-                                <td>{element.name}</td>
+                            <tr key={element.title}>
+                                <td>{dayjs(element.date).format('DD/MM/YYYY')}</td>
+                                <td>{element.title}</td>
                                 <td>{element.amount}</td>
                                 <td>{element.category}</td>
                             </tr>
                         ))}
                     </tbody>
                 </Table>
+                {!sortedData.length > 0 && <p className="no-expenses-msg">No expenses found</p>}
             </div>
         </PageWrapper>
     );
