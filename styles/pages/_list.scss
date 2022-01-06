@@ -35,6 +35,12 @@
             float: right;
         }
     }
+
+    tbody > tr {
+        &:hover {
+            cursor: pointer;
+        }
+    }
 }
 
 .no-expenses-msg {

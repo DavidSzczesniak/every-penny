@@ -1,7 +1,7 @@
 import { Button } from '@mantine/core';
 import Head from 'next/head';
 import Image from 'next/image';
-import { customButtonStyles } from 'utils/customButtonStyles';
+import { primaryButtonStyles } from 'utils/customButtonStyles';
 
 export default function Home() {
     return (
@@ -34,7 +34,7 @@ export default function Home() {
                         Funny tagline with some text will go here to add some content underneath the
                         big text above.
                     </p>
-                    <Button color="green" radius="md" size="md" styles={customButtonStyles}>
+                    <Button size="md" styles={primaryButtonStyles}>
                         Get Started
                     </Button>
                 </div>

@@ -1,15 +1,16 @@
 import { XIcon } from '@heroicons/react/solid';
 import { Button, Modal, NumberInput, Select, Textarea, TextInput } from '@mantine/core';
 import { DatePicker } from '@mantine/dates';
-import { useForm } from '@mantine/hooks';
+import { useForm, useUuid } from '@mantine/hooks';
 import { categories } from 'config/expensesConfig';
 import { ExpensesContext } from 'context/expensesContext';
-import React, { useContext } from 'react';
-import { customButtonStyles } from 'utils/customButtonStyles';
+import React, { useContext, useEffect } from 'react';
+import { generalButtonStyles, primaryButtonStyles } from 'utils/customButtonStyles';
 
-const AddExpenseModal = ({ opened, setOpened }) => {
+const ExpenseModal = ({ opened, setOpened, expenseData }) => {
+    const uuid = useUuid();
     const form = useForm({
-        initialValues: {
+        initialValues: expenseData || {
             title: '',
             amount: 0,
             date: new Date(),
@@ -27,8 +28,22 @@ const AddExpenseModal = ({ opened, setOpened }) => {
     });
     const { dispatch } = useContext(ExpensesContext);
 
+    useEffect(() => {
+        console.log('expense data', expenseData);
+    }, [expenseData]);
+
     const handleSubmit = (values) => {
-        dispatch({ type: 'ADD_EXPENSE', expense: values });
+        if (expenseData) {
+            dispatch({ type: 'EDIT_EXPENSE', id: expenseData.id, updates: values });
+        } else {
+            dispatch({ type: 'ADD_EXPENSE', expense: { id: uuid, ...values } });
+        }
+        form.reset();
+        setOpened(false);
+    };
+
+    const handleRemoveExpense = () => {
+        dispatch({ type: 'REMOVE_EXPENSE', id: expenseData.id });
         form.reset();
         setOpened(false);
     };
@@ -41,7 +56,7 @@ const AddExpenseModal = ({ opened, setOpened }) => {
             radius="lg"
             hideCloseButton>
             <div className="expense-modal__title">
-                <h3>Add New Expense</h3>
+                <h3>{`${expenseData ? 'Edit Expense' : 'Add New Expense'}`}</h3>
                 <button className="icon-button" onClick={() => setOpened(false)}>
                     <XIcon />
                 </button>
@@ -80,11 +95,22 @@ const AddExpenseModal = ({ opened, setOpened }) => {
                     placeholder="Add a note (optional)"
                     {...form.getInputProps('note')}
                 />
-                <Button type="submit" radius="md" styles={customButtonStyles}>
-                    Save
-                </Button>
+                <div className="modal-buttons">
+                    {expenseData && (
+                        <Button
+                            variant="outline"
+                            color="red"
+                            styles={generalButtonStyles}
+                            onClick={handleRemoveExpense}>
+                            Remove
+                        </Button>
+                    )}
+                    <Button type="submit" styles={primaryButtonStyles}>
+                        Save
+                    </Button>
+                </div>
             </form>
         </Modal>
     );
 };
-export default AddExpenseModal;
+export default ExpenseModal;

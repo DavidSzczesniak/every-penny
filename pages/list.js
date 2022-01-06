@@ -1,17 +1,19 @@
 import { ChevronDownIcon, ChevronUpIcon, SearchIcon } from '@heroicons/react/solid';
 import { Select, Table, TextInput } from '@mantine/core';
 import { DateRangePicker } from '@mantine/dates';
+import ExpenseModal from 'components/ExpenseModal';
 import PageWrapper from 'components/PageWrapper';
 import { categories, tableHeadings } from 'config/expensesConfig';
 import { ExpensesContext } from 'context/expensesContext';
 import dayjs from 'dayjs';
 import { useSortableData } from 'hooks/useSortableData';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { mockExpenses } from 'tests/mocks/expenses';
 
 const ExpensesList = () => {
     const { state: expensesState, dispatch } = useContext(ExpensesContext);
     const { sortedData, handleSort, sortConfig } = useSortableData(expensesState);
+    const [currentExpense, setCurrentExpense] = useState(undefined);
 
     useEffect(() => {
         dispatch({ type: 'SET_EXPENSES', expenses: mockExpenses });
@@ -38,6 +40,13 @@ const ExpensesList = () => {
 
     return (
         <PageWrapper title="Expenses List">
+            {!!currentExpense && (
+                <ExpenseModal
+                    opened={!!currentExpense}
+                    setOpened={setCurrentExpense}
+                    expenseData={currentExpense}
+                />
+            )}
             <div className="expenses-list">
                 <div className="expenses-list__filters">
                     <TextInput
@@ -70,12 +79,16 @@ const ExpensesList = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {sortedData.map((element) => (
-                            <tr key={element.title}>
-                                <td>{dayjs(element.date).format('DD/MM/YYYY')}</td>
-                                <td>{element.title}</td>
-                                <td>{element.amount}</td>
-                                <td>{element.category}</td>
+                        {sortedData.map((expense) => (
+                            <tr
+                                key={expense.title}
+                                onClick={() => {
+                                    setCurrentExpense(expense);
+                                }}>
+                                <td>{dayjs(expense.date).format('DD/MM/YYYY')}</td>
+                                <td>{expense.title}</td>
+                                <td>{expense.amount}</td>
+                                <td>{expense.category}</td>
                             </tr>
                         ))}
                     </tbody>

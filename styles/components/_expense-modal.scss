@@ -21,12 +21,6 @@
         margin-top: $sm-size;
     }
 
-    > button {
-        align-self: center;
-        margin-top: $lg-size;
-        width: 50%;
-    }
-
     .inline-fields {
         display: flex;
         flex-direction: column;
@@ -42,6 +36,20 @@
             > :nth-child(2) {
                 margin: 0 0 0 $sm-size;
             }
+        }
+    }
+
+    .modal-buttons {
+        display: flex;
+        justify-content: center;
+
+        button {
+            margin-top: $lg-size;
+            width: 50%;
+        }
+
+        button:nth-child(2) {
+            margin-left: $sm-size;
         }
     }
 }

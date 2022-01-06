@@ -1,7 +1,18 @@
 import variables from 'styles/base/_settings.module.scss';
 
-export const customButtonStyles = (theme) => ({
+const general = {
+    borderRadius: '8px',
+};
+
+export const generalButtonStyles = () => ({
     root: {
+        ...general,
+    },
+});
+
+export const primaryButtonStyles = (theme) => ({
+    root: {
+        ...general,
         backgroundColor: variables.green,
 
         '&:hover': {

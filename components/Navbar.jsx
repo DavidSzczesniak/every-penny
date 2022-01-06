@@ -1,8 +1,8 @@
-import React from 'react';
 import { CurrencyDollarIcon, MenuIcon } from '@heroicons/react/solid';
-import Link from 'next/link';
 import { Button } from '@mantine/core';
-import { customButtonStyles } from 'utils/customButtonStyles';
+import Link from 'next/link';
+import React from 'react';
+import { primaryButtonStyles } from 'utils/customButtonStyles';
 
 const Navbar = ({ toggleSidebar }) => (
     <div className="navbar content-container">
@@ -15,9 +15,7 @@ const Navbar = ({ toggleSidebar }) => (
         <div className="navbar__links">
             <Link href="/dashboard">Dashboard</Link>
             <Link href="/list">Expenses List</Link>
-            <Button color="green" radius="md" styles={customButtonStyles}>
-                Sign Up
-            </Button>
+            <Button styles={primaryButtonStyles}>Sign Up</Button>
         </div>
         <div className="navbar__button">
             <button className="icon-button" onClick={toggleSidebar}>
