@@ -7,12 +7,22 @@ import { categories, tableHeadings } from 'config/expensesConfig';
 import { ExpensesContext } from 'context/expensesContext';
 import dayjs from 'dayjs';
 import { useSortableData } from 'hooks/useSortableData';
+import { useTableFilters } from 'hooks/useTableFilters';
 import React, { useContext, useEffect, useState } from 'react';
 import { mockExpenses } from 'tests/mocks/expenses';
 
 const ExpensesList = () => {
     const { state: expensesState, dispatch } = useContext(ExpensesContext);
-    const { sortedData, handleSort, sortConfig } = useSortableData(expensesState);
+    const {
+        filteredData,
+        searchValue,
+        dateRangeValue,
+        categoryValue,
+        filterByTitle,
+        filterByCategory,
+        filterByDateRange,
+    } = useTableFilters(expensesState);
+    const { sortedData, handleSort, sortConfig } = useSortableData(filteredData);
     const [currentExpense, setCurrentExpense] = useState(undefined);
 
     useEffect(() => {
@@ -53,10 +63,14 @@ const ExpensesList = () => {
                         icon={<SearchIcon width={15} height={15} />}
                         aria-label="Search"
                         placeholder="Search"
+                        value={searchValue}
+                        onChange={(e) => filterByTitle(e.target.value)}
                     />
                     <DateRangePicker
                         placeholder="Pick a date range"
                         aria-label="Date range filter"
+                        value={dateRangeValue}
+                        onChange={(value) => filterByDateRange(value)}
                     />
                     <Select
                         aria-label="Select category"
@@ -64,6 +78,8 @@ const ExpensesList = () => {
                         data={categories}
                         clearable
                         clearButtonLabel="Clear select field"
+                        value={categoryValue}
+                        onChange={(value) => filterByCategory(value)}
                     />
                 </div>
                 <Table className="expenses-list__table" highlightOnHover striped>
