@@ -5,6 +5,7 @@
 .expenses-list__filters {
     display: flex;
     flex-direction: column;
+    margin-bottom: $lg-size;
 
     > * {
         margin-bottom: $md-size;
@@ -21,8 +22,6 @@
 }
 
 .expenses-list__table {
-    margin-top: $lg-size;
-
     th {
         &:hover {
             cursor: pointer;

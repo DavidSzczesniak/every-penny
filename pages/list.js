@@ -11,6 +11,7 @@ const ExpensesListPage = () => {
     const { user } = useAuth();
     const { dispatch } = useContext(ExpensesContext);
     const [currentExpense, setCurrentExpense] = useState(undefined);
+    const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
         if (user) {
@@ -26,6 +27,9 @@ const ExpensesListPage = () => {
                         });
                     }
                     dispatch({ type: 'SET_EXPENSES', expenses });
+                    setLoading(false);
+                } else {
+                    setLoading(false);
                 }
             });
         }
@@ -40,7 +44,7 @@ const ExpensesListPage = () => {
                     expenseData={currentExpense}
                 />
             )}
-            <ExpenseList setCurrentExpense={setCurrentExpense} />
+            <ExpenseList setCurrentExpense={setCurrentExpense} isLoading={isLoading} />
         </PageWrapper>
     );
 };

@@ -7,8 +7,9 @@ import dayjs from 'dayjs';
 import { useSortableData } from 'hooks/useSortableData';
 import { useTableFilters } from 'hooks/useTableFilters';
 import React, { useContext } from 'react';
+import LoadingScreen from './LoadingScreen';
 
-const ExpenseList = ({ setCurrentExpense }) => {
+const ExpenseList = ({ setCurrentExpense, isLoading }) => {
     const { state: expensesState } = useContext(ExpensesContext);
     const {
         filteredData,
@@ -65,34 +66,40 @@ const ExpenseList = ({ setCurrentExpense }) => {
                     onChange={(value) => filterByCategory(value)}
                 />
             </div>
-            <Table className="expenses-list__table" highlightOnHover striped>
-                <thead>
-                    <tr>
-                        {tableHeadings.map((heading) => (
-                            <TableHeading
-                                key={heading.prop}
-                                prop={heading.prop}
-                                label={heading.label}
-                            />
-                        ))}
-                    </tr>
-                </thead>
-                <tbody>
-                    {sortedData.map((expense) => (
-                        <tr
-                            key={expense.id}
-                            onClick={() => {
-                                setCurrentExpense(expense);
-                            }}>
-                            <td>{dayjs(expense.createdAt).format('DD/MM/YYYY')}</td>
-                            <td>{expense.title}</td>
-                            <td>{expense.amount}</td>
-                            <td>{expense.category}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </Table>
-            {!sortedData.length && <p className="no-expenses-msg">No expenses found</p>}
+            {isLoading ? (
+                <LoadingScreen />
+            ) : (
+                <>
+                    <Table className="expenses-list__table" highlightOnHover striped>
+                        <thead>
+                            <tr>
+                                {tableHeadings.map((heading) => (
+                                    <TableHeading
+                                        key={heading.prop}
+                                        prop={heading.prop}
+                                        label={heading.label}
+                                    />
+                                ))}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {sortedData.map((expense) => (
+                                <tr
+                                    key={expense.id}
+                                    onClick={() => {
+                                        setCurrentExpense(expense);
+                                    }}>
+                                    <td>{dayjs(expense.createdAt).format('DD/MM/YYYY')}</td>
+                                    <td>{expense.title}</td>
+                                    <td>{expense.amount}</td>
+                                    <td>{expense.category}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
+                    {!sortedData.length && <p className="no-expenses-msg">No expenses found</p>}
+                </>
+            )}
         </div>
     );
 };
