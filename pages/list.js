@@ -97,11 +97,11 @@ const ExpensesList = () => {
                     <tbody>
                         {sortedData.map((expense) => (
                             <tr
-                                key={expense.title}
+                                key={expense.id}
                                 onClick={() => {
                                     setCurrentExpense(expense);
                                 }}>
-                                <td>{dayjs(expense.date).format('DD/MM/YYYY')}</td>
+                                <td>{dayjs(expense.createdAt).format('DD/MM/YYYY')}</td>
                                 <td>{expense.title}</td>
                                 <td>{expense.amount}</td>
                                 <td>{expense.category}</td>

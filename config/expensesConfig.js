@@ -7,7 +7,7 @@ export const categories = [
 
 export const tableHeadings = [
     {
-        prop: 'date',
+        prop: 'createdAt',
         label: 'Date',
     },
     {

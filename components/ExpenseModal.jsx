@@ -13,7 +13,7 @@ const ExpenseModal = ({ opened, setOpened, expenseData }) => {
         initialValues: expenseData || {
             title: '',
             amount: 0,
-            date: new Date(),
+            createdAt: new Date(),
             category: '',
             note: '',
         },
@@ -80,7 +80,11 @@ const ExpenseModal = ({ opened, setOpened, expenseData }) => {
                         required
                         {...form.getInputProps('amount')}
                     />
-                    <DatePicker label="Date" {...form.getInputProps('date')} clearable={false} />
+                    <DatePicker
+                        label="Date"
+                        {...form.getInputProps('createdAt')}
+                        clearable={false}
+                    />
                 </div>
                 <Select
                     label="Select category"

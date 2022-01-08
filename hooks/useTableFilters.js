@@ -41,11 +41,11 @@ export const useTableFilters = (data) => {
         // filter by date
         let dateRangeMatch = true;
         if (dateRangeValue) {
-            const expenseDate = dayjs(expense.date);
+            const createdAt = dayjs(expense.createdAt);
             const startDate = dayjs(dateRangeValue[0]);
             const endDate = dayjs(dateRangeValue[1]);
-            const startDateMatch = startDate.isSameOrBefore(expenseDate, 'day');
-            const endDateMatch = endDate.isSameOrAfter(expenseDate, 'day');
+            const startDateMatch = startDate.isSameOrBefore(createdAt, 'day');
+            const endDateMatch = endDate.isSameOrAfter(createdAt, 'day');
             dateRangeMatch = startDateMatch && endDateMatch;
         }
 
