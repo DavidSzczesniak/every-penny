@@ -1,10 +1,10 @@
 import ExpenseList from 'components/ExpenseList';
 import ExpenseModal from 'components/ExpenseModal';
 import PageWrapper from 'components/PageWrapper';
+import { database } from 'config/firebase';
 import { useAuth } from 'context/auth';
 import { ExpensesContext } from 'context/expensesContext';
-import { child, get } from 'firebase/database';
-import databaseRef from 'lib/firebase';
+import { child, get, ref } from 'firebase/database';
 import React, { useContext, useEffect, useState } from 'react';
 
 const ExpensesListPage = () => {
@@ -14,6 +14,7 @@ const ExpensesListPage = () => {
 
     useEffect(() => {
         if (user) {
+            const databaseRef = ref(database);
             get(child(databaseRef, `users/${user.uid}/expenses`)).then((snapshot) => {
                 if (snapshot.exists()) {
                     const dbData = snapshot.val();

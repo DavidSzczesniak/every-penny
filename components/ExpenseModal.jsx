@@ -1,14 +1,15 @@
 import { XIcon } from '@heroicons/react/solid';
 import { Button, Modal, NumberInput, Select, Textarea, TextInput } from '@mantine/core';
 import { DatePicker } from '@mantine/dates';
-import { useForm, useUuid } from '@mantine/hooks';
+import { useForm } from '@mantine/hooks';
 import { categories } from 'config/expensesConfig';
-import { ExpensesContext } from 'context/expensesContext';
-import React, { useContext, useEffect } from 'react';
+import { useAuth } from 'context/auth';
+import { addExpense, editExpense, ExpensesContext, removeExpense } from 'context/expensesContext';
+import React, { useContext } from 'react';
 import { generalButtonStyles, primaryButtonStyles } from 'utils/customButtonStyles';
 
 const ExpenseModal = ({ opened, setOpened, expenseData = null }) => {
-    const uuid = useUuid();
+    const { user } = useAuth();
     const form = useForm({
         initialValues: expenseData || {
             title: '',
@@ -28,22 +29,18 @@ const ExpenseModal = ({ opened, setOpened, expenseData = null }) => {
     });
     const { dispatch } = useContext(ExpensesContext);
 
-    useEffect(() => {
-        console.log('expense data', expenseData);
-    }, [expenseData]);
-
     const handleSubmit = (values) => {
         if (expenseData) {
-            dispatch({ type: 'EDIT_EXPENSE', id: expenseData.id, updates: values });
+            dispatch(editExpense(expenseData.id, values, user.uid));
         } else {
-            dispatch({ type: 'ADD_EXPENSE', expense: { id: uuid, ...values } });
+            dispatch(addExpense(values, user.uid));
         }
         form.reset();
         setOpened(false);
     };
 
     const handleRemoveExpense = () => {
-        dispatch({ type: 'REMOVE_EXPENSE', id: expenseData.id });
+        dispatch(removeExpense(expenseData.id, user.uid));
         form.reset();
         setOpened(false);
     };
