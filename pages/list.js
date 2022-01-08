@@ -1,52 +1,34 @@
-import { ChevronDownIcon, ChevronUpIcon, SearchIcon } from '@heroicons/react/solid';
-import { Select, Table, TextInput } from '@mantine/core';
-import { DateRangePicker } from '@mantine/dates';
+import ExpenseList from 'components/ExpenseList';
 import ExpenseModal from 'components/ExpenseModal';
 import PageWrapper from 'components/PageWrapper';
-import { categories, tableHeadings } from 'config/expensesConfig';
+import { useAuth } from 'context/auth';
 import { ExpensesContext } from 'context/expensesContext';
-import dayjs from 'dayjs';
-import { useSortableData } from 'hooks/useSortableData';
-import { useTableFilters } from 'hooks/useTableFilters';
+import { child, get } from 'firebase/database';
+import databaseRef from 'lib/firebase';
 import React, { useContext, useEffect, useState } from 'react';
-import { mockExpenses } from 'tests/mocks/expenses';
 
-const ExpensesList = () => {
-    const { state: expensesState, dispatch } = useContext(ExpensesContext);
-    const {
-        filteredData,
-        searchValue,
-        dateRangeValue,
-        categoryValue,
-        filterByTitle,
-        filterByCategory,
-        filterByDateRange,
-    } = useTableFilters(expensesState);
-    const { sortedData, handleSort, sortConfig } = useSortableData(filteredData);
+const ExpensesListPage = () => {
+    const { user } = useAuth();
+    const { dispatch } = useContext(ExpensesContext);
     const [currentExpense, setCurrentExpense] = useState(undefined);
 
     useEffect(() => {
-        dispatch({ type: 'SET_EXPENSES', expenses: mockExpenses });
-    }, [dispatch]);
-
-    const getSortIcon = () => {
-        if (sortConfig.direction === 'ascending') {
-            return <ChevronUpIcon />;
+        if (user) {
+            get(child(databaseRef, `users/${user.uid}/expenses`)).then((snapshot) => {
+                if (snapshot.exists()) {
+                    const dbData = snapshot.val();
+                    const expenses = [];
+                    for (const [key, value] of Object.entries(dbData)) {
+                        expenses.push({
+                            id: key,
+                            ...value,
+                        });
+                    }
+                    dispatch({ type: 'SET_EXPENSES', expenses });
+                }
+            });
         }
-
-        if (sortConfig.direction === 'descending') {
-            return <ChevronDownIcon />;
-        }
-
-        return null;
-    };
-
-    const TableHeading = ({ prop, label }) => (
-        <th onClick={() => handleSort(prop)}>
-            <span>{label}</span>
-            {sortConfig.key === prop && getSortIcon()}
-        </th>
-    );
+    }, [user, dispatch]);
 
     return (
         <PageWrapper title="Expenses List">
@@ -57,62 +39,9 @@ const ExpensesList = () => {
                     expenseData={currentExpense}
                 />
             )}
-            <div className="expenses-list">
-                <div className="expenses-list__filters">
-                    <TextInput
-                        icon={<SearchIcon width={15} height={15} />}
-                        aria-label="Search"
-                        placeholder="Search"
-                        value={searchValue}
-                        onChange={(e) => filterByTitle(e.target.value)}
-                    />
-                    <DateRangePicker
-                        placeholder="Pick a date range"
-                        aria-label="Date range filter"
-                        value={dateRangeValue}
-                        onChange={(value) => filterByDateRange(value)}
-                    />
-                    <Select
-                        aria-label="Select category"
-                        placeholder="Select category"
-                        data={categories}
-                        clearable
-                        clearButtonLabel="Clear select field"
-                        value={categoryValue}
-                        onChange={(value) => filterByCategory(value)}
-                    />
-                </div>
-                <Table className="expenses-list__table" highlightOnHover striped>
-                    <thead>
-                        <tr>
-                            {tableHeadings.map((heading) => (
-                                <TableHeading
-                                    key={heading.prop}
-                                    prop={heading.prop}
-                                    label={heading.label}
-                                />
-                            ))}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {sortedData.map((expense) => (
-                            <tr
-                                key={expense.id}
-                                onClick={() => {
-                                    setCurrentExpense(expense);
-                                }}>
-                                <td>{dayjs(expense.createdAt).format('DD/MM/YYYY')}</td>
-                                <td>{expense.title}</td>
-                                <td>{expense.amount}</td>
-                                <td>{expense.category}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </Table>
-                {!sortedData.length > 0 && <p className="no-expenses-msg">No expenses found</p>}
-            </div>
+            <ExpenseList setCurrentExpense={setCurrentExpense} />
         </PageWrapper>
     );
 };
 
-export default ExpensesList;
+export default ExpensesListPage;
