@@ -7,7 +7,7 @@ import { ExpensesContext } from 'context/expensesContext';
 import React, { useContext, useEffect } from 'react';
 import { generalButtonStyles, primaryButtonStyles } from 'utils/customButtonStyles';
 
-const ExpenseModal = ({ opened, setOpened, expenseData }) => {
+const ExpenseModal = ({ opened, setOpened, expenseData = null }) => {
     const uuid = useUuid();
     const form = useForm({
         initialValues: expenseData || {

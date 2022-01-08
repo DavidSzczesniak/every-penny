@@ -24,5 +24,5 @@ export const expensesReducer = (state, action) => {
 
 export const ExpensesContext = createContext({
     state: initialExpensesState,
-    dispatch: () => 0,
+    dispatch: ({}) => 0,
 });
