@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import React, { useReducer, useState } from 'react';
 import 'styles/styles.scss';
 import { disableScrolling, enableScrolling } from 'utils/utils';
+import { AuthProvider } from 'context/auth';
 
 function MyApp({ Component, pageProps }) {
     const [sidebarOpen, setSidebar] = useState(false);
@@ -32,19 +33,21 @@ function MyApp({ Component, pageProps }) {
             theme={{
                 fontFamily: 'Poppins, sans-serif',
             }}>
-            <ExpensesContext.Provider value={{ state, dispatch }}>
-                {sidebarOpen ? (
-                    <Sidebar toggleSidebar={toggleSidebar} />
-                ) : (
-                    <Navbar toggleSidebar={toggleSidebar} />
-                )}
-                <div className="layout-wrapper">
-                    <div className="content-container">
-                        <Component {...pageProps} />
+            <AuthProvider>
+                <ExpensesContext.Provider value={{ state, dispatch }}>
+                    {sidebarOpen ? (
+                        <Sidebar toggleSidebar={toggleSidebar} />
+                    ) : (
+                        <Navbar toggleSidebar={toggleSidebar} />
+                    )}
+                    <div className="layout-wrapper">
+                        <div className="content-container">
+                            <Component {...pageProps} />
+                        </div>
                     </div>
-                </div>
-                <div className="page-divider"></div>
-            </ExpensesContext.Provider>
+                    <div className="page-divider"></div>
+                </ExpensesContext.Provider>
+            </AuthProvider>
         </MantineProvider>
     );
 }

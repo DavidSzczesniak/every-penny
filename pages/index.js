@@ -1,6 +1,7 @@
 import { Button } from '@mantine/core';
 import Head from 'next/head';
 import Image from 'next/image';
+import React from 'react';
 import { primaryButtonStyles } from 'utils/customButtonStyles';
 
 export default function Home() {
