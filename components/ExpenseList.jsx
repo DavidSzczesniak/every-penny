@@ -8,7 +8,7 @@ import { useSortableData } from 'hooks/useSortableData';
 import { useTableFilters } from 'hooks/useTableFilters';
 import React, { useContext } from 'react';
 
-const ExpenseListTable = ({ setCurrentExpense }) => {
+const ExpenseList = ({ setCurrentExpense }) => {
     const { state: expensesState } = useContext(ExpensesContext);
     const {
         filteredData,
@@ -97,4 +97,4 @@ const ExpenseListTable = ({ setCurrentExpense }) => {
     );
 };
 
-export default ExpenseListTable;
+export default ExpenseList;
