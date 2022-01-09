@@ -25,8 +25,8 @@ export const removeExpense = (id, uid) => {
 
 export const editExpense = (id, updates, uid) => {
     const updatedExpense = {
-        createdAt: dayjs(updates.createdAt).valueOf(),
         ...updates,
+        createdAt: dayjs(updates.createdAt).valueOf(),
     };
     delete updatedExpense.id;
 

@@ -5,11 +5,15 @@ import { useForm } from '@mantine/hooks';
 import { categories } from 'config/expensesConfig';
 import { useAuth } from 'context/auth';
 import { addExpense, editExpense, ExpensesContext, removeExpense } from 'context/expensesContext';
+import dayjs from 'dayjs';
 import React, { useContext } from 'react';
 import { generalButtonStyles, primaryButtonStyles } from 'utils/customButtonStyles';
 
 const ExpenseModal = ({ opened, setOpened, expenseData = null }) => {
     const { user } = useAuth();
+    if (expenseData) {
+        expenseData.createdAt = dayjs(expenseData.createdAt).toDate();
+    }
     const form = useForm({
         initialValues: expenseData || {
             title: '',
