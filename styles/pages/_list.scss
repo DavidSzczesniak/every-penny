@@ -42,6 +42,26 @@
     }
 }
 
+.expenses-list__pagination {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: $lg-size;
+
+    .mantine-Group-root {
+        margin-top: $lg-size;
+        align-self: center;
+    }
+
+    @media (min-width: $tablet-breakpoint) {
+        flex-direction: row;
+
+        .mantine-Group-root {
+            margin-top: 0;
+        }
+    }
+}
+
 .no-expenses-msg {
     text-align: center;
     margin-top: $lg-size;
