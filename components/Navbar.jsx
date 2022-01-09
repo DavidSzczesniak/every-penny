@@ -4,6 +4,7 @@ import { useAuth } from 'context/auth';
 import Link from 'next/link';
 import React from 'react';
 import { primaryButtonStyles } from 'utils/customButtonStyles';
+import NavUserInfo from './NavUserInfo';
 
 const Navbar = ({ toggleSidebar }) => {
     const { user, signinWithGoogle, signout } = useAuth();
@@ -19,14 +20,12 @@ const Navbar = ({ toggleSidebar }) => {
                 <Link href="/dashboard">Dashboard</Link>
                 <Link href="/list">Expenses List</Link>
                 {user ? (
-                    <>
-                        <p>{user.name}</p>
-                        <Button styles={primaryButtonStyles} onClick={signout}>
-                            Sign Out
-                        </Button>
-                    </>
+                    <NavUserInfo user={user} signout={signout} />
                 ) : (
-                    <Button styles={primaryButtonStyles} onClick={signinWithGoogle}>
+                    <Button
+                        className="sign-in"
+                        styles={primaryButtonStyles}
+                        onClick={signinWithGoogle}>
                         Sign In
                     </Button>
                 )}
