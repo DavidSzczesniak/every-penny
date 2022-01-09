@@ -6,8 +6,8 @@ const PlaceholderAvatar = () => (
         className="user-info__avatar"
         src="/placeholder-avatar.png"
         alt="placeholder avatar"
-        width={50}
-        height={50}
+        width={40}
+        height={40}
     />
 );
 

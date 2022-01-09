@@ -32,6 +32,7 @@ function MyApp({ Component, pageProps }) {
         <MantineProvider
             theme={{
                 fontFamily: 'Poppins, sans-serif',
+                primaryColor: 'green',
             }}>
             <AuthProvider>
                 <ExpensesContext.Provider value={{ state, dispatch }}>

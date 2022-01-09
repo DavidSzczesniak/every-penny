@@ -18,10 +18,10 @@ const NavUserInfo = ({ user, signout }) => {
                     <UnstyledButton className="user-info" onClick={() => setOpened(!opened)}>
                         <Suspense fallback={<PlaceholderAvatar />}>
                             <SuspenseImage
-                                className="user-info_avatar"
+                                className="user-info__avatar"
                                 src={user.photoUrl}
                                 alt="user avatar"
-                                referrerpolicy="no-referrer"
+                                referrerPolicy="no-referrer"
                             />
                         </Suspense>
                         <p className="user-info__username">{firstName}</p>
