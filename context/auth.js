@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext, createContext } from 'react';
 import Router, { useRouter } from 'next/router';
-// import { createUser } from './db';
 import {
     getAuth,
     GoogleAuthProvider,
@@ -46,7 +45,6 @@ function useFirebaseAuth() {
             const user = await formatUser(rawUser);
             const { token, ...userWithoutToken } = user;
 
-            // createUser(user.uid, userWithoutToken);
             setUser(user);
 
             setLoading(false);
