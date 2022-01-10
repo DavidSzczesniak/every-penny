@@ -5,6 +5,7 @@ import { database } from 'config/firebase';
 import { useAuth } from 'context/auth';
 import { ExpensesContext } from 'context/expensesContext';
 import { child, get, ref } from 'firebase/database';
+import { useExpensesContext } from 'hooks/useExpensesContext';
 import React, { useContext, useEffect, useState } from 'react';
 
 const ExpensesListPage = () => {
@@ -12,6 +13,7 @@ const ExpensesListPage = () => {
     const { dispatch } = useContext(ExpensesContext);
     const [currentExpense, setCurrentExpense] = useState(undefined);
     const [isLoading, setLoading] = useState(true);
+    const { editExpense, removeExpense } = useExpensesContext();
 
     useEffect(() => {
         if (user) {
@@ -42,6 +44,8 @@ const ExpensesListPage = () => {
                     opened={!!currentExpense}
                     setOpened={setCurrentExpense}
                     expenseData={currentExpense}
+                    onSubmit={(values) => editExpense(currentExpense.id, values)}
+                    onRemove={() => removeExpense(currentExpense.id)}
                 />
             )}
             <ExpenseList setCurrentExpense={setCurrentExpense} isLoading={isLoading} />

@@ -3,14 +3,11 @@ import { Button, Modal, NumberInput, Select, Textarea, TextInput } from '@mantin
 import { DatePicker } from '@mantine/dates';
 import { useForm } from '@mantine/hooks';
 import { categories } from 'config/expensesConfig';
-import { useAuth } from 'context/auth';
-import { addExpense, editExpense, ExpensesContext, removeExpense } from 'context/expensesContext';
 import dayjs from 'dayjs';
-import React, { useContext } from 'react';
+import React from 'react';
 import { generalButtonStyles, primaryButtonStyles } from 'utils/customButtonStyles';
 
-const ExpenseModal = ({ opened, setOpened, expenseData = null }) => {
-    const { user } = useAuth();
+const ExpenseModal = ({ opened, setOpened, onSubmit, expenseData = null, onRemove = null }) => {
     if (expenseData) {
         expenseData.createdAt = dayjs(expenseData.createdAt).toDate();
     }
@@ -31,22 +28,20 @@ const ExpenseModal = ({ opened, setOpened, expenseData = null }) => {
             amount: 'Amount is required and should be a number',
         },
     });
-    const { dispatch } = useContext(ExpensesContext);
 
-    const handleSubmit = (values) => {
-        if (expenseData) {
-            dispatch(editExpense(expenseData.id, values, user.uid));
-        } else {
-            dispatch(addExpense(values, user.uid));
-        }
+    const resetModal = () => {
         form.reset();
         setOpened(false);
     };
 
+    const handleSubmit = (values) => {
+        onSubmit(values);
+        resetModal();
+    };
+
     const handleRemoveExpense = () => {
-        dispatch(removeExpense(expenseData.id, user.uid));
-        form.reset();
-        setOpened(false);
+        onRemove();
+        resetModal();
     };
 
     return (
