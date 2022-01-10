@@ -1,4 +1,3 @@
-import '@testing-library/jest-dom/extend-expect';
 import { fireEvent, render, screen } from '@testing-library/react';
 import ExpenseModal from 'components/ExpenseModal';
 import React from 'react';
