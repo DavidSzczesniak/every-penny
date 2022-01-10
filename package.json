@@ -10,10 +10,10 @@
     },
     "dependencies": {
         "@heroicons/react": "^1.0.5",
-        "@mantine/core": "^3.4.3",
+        "@mantine/core": "^3.5.4",
         "@mantine/dates": "^3.4.3",
-        "@mantine/hooks": "^3.4.3",
-        "@mantine/modals": "^3.4.3",
+        "@mantine/hooks": "^3.5.4",
+        "@mantine/modals": "^3.5.4",
         "@testing-library/jest-dom": "^5.16.1",
         "@testing-library/react": "^12.1.2",
         "babel-jest": "^27.4.6",
@@ -28,10 +28,12 @@
         "sass": "^1.45.2"
     },
     "devDependencies": {
+        "@testing-library/dom": "^8.11.1",
+        "@testing-library/user-event": "^13.5.0",
         "eslint": "8.5.0",
         "eslint-config-next": "12.0.7",
-        "eslint-plugin-react": "^7.28.0",
         "eslint-plugin-jest-dom": "^4.0.1",
+        "eslint-plugin-react": "^7.28.0",
         "eslint-plugin-testing-library": "^5.0.3"
     }
 }
