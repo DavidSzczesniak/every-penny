@@ -3,8 +3,9 @@ import PageWrapper from 'components/PageWrapper';
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
+const mockChildren = <div>my homepage</div>;
+
 it('should render with basic props', () => {
-    const mockChildren = <div>my homepage</div>;
     render(<PageWrapper title="Home">{mockChildren}</PageWrapper>);
 
     expect(screen.getByRole('heading', { name: /Home/ })).toBeInTheDocument();
@@ -13,7 +14,6 @@ it('should render with basic props', () => {
 });
 
 it('should open modal', () => {
-    const mockChildren = <div>my homepage</div>;
     render(<PageWrapper title="Home">{mockChildren}</PageWrapper>);
 
     userEvent.click(screen.getByRole('button', { name: /Add New Expense/i }));
