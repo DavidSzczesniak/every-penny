@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext, createContext } from 'react';
 import Router, { useRouter } from 'next/router';
+import 'config/firebase';
 import {
     getAuth,
     GoogleAuthProvider,
