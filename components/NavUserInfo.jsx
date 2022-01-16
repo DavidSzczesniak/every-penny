@@ -13,6 +13,7 @@ const NavUserInfo = ({ user, signout }) => {
             opened={opened}
             onClose={() => setOpened(false)}
             position="bottom"
+            transition="scale"
             target={
                 <UnstyledButton className="user-info" onClick={() => setOpened(!opened)}>
                     <Suspense fallback={<PlaceholderAvatar />}>

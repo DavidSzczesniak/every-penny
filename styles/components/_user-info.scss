@@ -2,17 +2,29 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-left: $lg-size;
+    margin-left: 0;
+    font-size: $font-lg;
 
     svg {
         fill: black;
         width: 2.5rem;
     }
+
+    @media (min-width: $tablet-breakpoint) {
+        margin-left: $lg-size;
+        font-size: $font-md;
+    }
 }
 
 .user-info__avatar {
     border-radius: 50%;
-    width: 4rem;
+    margin-right: $sm-size;
+    width: 7rem;
+
+    @media (min-width: $tablet-breakpoint) {
+        width: 4rem;
+        margin-right: 0;
+    }
 }
 
 .user-info__username {
@@ -23,4 +35,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-size: $font-md;
+    padding: $md-size;
+
+    @media (min-width: $tablet-breakpoint) {
+        font-size: inherit;
+        padding: 0;
+    }
 }
