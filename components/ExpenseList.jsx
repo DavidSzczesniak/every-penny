@@ -2,14 +2,12 @@ import { SearchIcon } from '@heroicons/react/solid';
 import { Select, TextInput } from '@mantine/core';
 import { DateRangePicker } from '@mantine/dates';
 import { categories } from 'config/expensesConfig';
-import { ExpensesContext } from 'context/expensesContext';
 import { useTableFilters } from 'hooks/useTableFilters';
-import React, { useContext } from 'react';
+import React from 'react';
 import ExpenseListTable from './ExpenseListTable';
 import LoadingScreen from './LoadingScreen';
 
-const ExpenseList = ({ setCurrentExpense, isLoading }) => {
-    const { state: expensesState } = useContext(ExpensesContext);
+const ExpenseList = ({ expenses, setCurrentExpense, isLoading }) => {
     const {
         filteredData,
         searchValue,
@@ -18,7 +16,7 @@ const ExpenseList = ({ setCurrentExpense, isLoading }) => {
         filterByTitle,
         filterByCategory,
         filterByDateRange,
-    } = useTableFilters(expensesState);
+    } = useTableFilters(expenses);
 
     return (
         <div className="expenses-list">

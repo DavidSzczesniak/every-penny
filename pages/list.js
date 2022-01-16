@@ -10,7 +10,7 @@ import React, { useContext, useEffect, useState } from 'react';
 
 const ExpensesListPage = () => {
     const { user } = useAuth();
-    const { dispatch } = useContext(ExpensesContext);
+    const { state: expensesState, dispatch } = useContext(ExpensesContext);
     const [currentExpense, setCurrentExpense] = useState(undefined);
     const [isLoading, setLoading] = useState(true);
     const { editExpense, removeExpense } = useExpensesContext();
@@ -48,7 +48,11 @@ const ExpensesListPage = () => {
                     onRemove={() => removeExpense(currentExpense.id)}
                 />
             )}
-            <ExpenseList setCurrentExpense={setCurrentExpense} isLoading={isLoading} />
+            <ExpenseList
+                expenses={expensesState}
+                setCurrentExpense={setCurrentExpense}
+                isLoading={isLoading}
+            />
         </PageWrapper>
     );
 };
