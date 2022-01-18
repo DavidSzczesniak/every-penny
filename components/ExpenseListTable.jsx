@@ -55,6 +55,7 @@ const ExpenseListTable = ({ expenses, setCurrentExpense }) => {
                     </tbody>
                 </Table>
             </div>
+            {!sortedData.length && <p className="no-expenses-msg">No expenses found</p>}
             <div className="expenses-list__pagination">
                 <Select
                     aria-label="Select table row amount"
@@ -73,7 +74,6 @@ const ExpenseListTable = ({ expenses, setCurrentExpense }) => {
                     onChange={setPage}
                 />
             </div>
-            {!sortedData.length && <p className="no-expenses-msg">No expenses found</p>}
         </>
     );
 };
