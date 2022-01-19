@@ -79,16 +79,15 @@ export const useDashboardStats = () => {
             }
 
             // assign leftover percentage
-            const leftOver = newAllocation.reduce((a, b) => ({
+            const totalAllocation = newAllocation.reduce((a, b) => ({
                 allocation: a.allocation + b.allocation,
             })).allocation;
 
             newAllocation = [
                 ...newAllocation,
-
                 {
                     name: 'none',
-                    allocation: Number((100 - leftOver).toFixed(2)),
+                    allocation: Number((100 - totalAllocation).toFixed(2)),
                     color: getRandomColor(),
                 },
             ];
