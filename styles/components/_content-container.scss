@@ -1,6 +1,10 @@
 .content-container {
-    width: 90%;
+    width: 97.5%;
     max-width: 120rem;
     margin: 0 auto;
     padding: $md-size 1rem;
+
+    @media (min-width: $tablet-breakpoint) {
+        width: 90%;
+    }
 }

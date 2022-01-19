@@ -2,7 +2,7 @@ div.navbar {
     display: flex;
     justify-content: space-between;
 
-    @media (min-width: $desktop-breakpoint) {
+    @media (min-width: $tablet-breakpoint) {
         margin-bottom: $lg-size;
     }
 }

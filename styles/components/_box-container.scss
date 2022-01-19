@@ -5,5 +5,9 @@
     background: white;
     border-radius: 1.5rem;
     margin-top: $md-size;
-    padding: $lg-size;
+    padding: 2.5rem;
+
+    @media (min-width: $tablet-breakpoint) {
+        padding: $lg-size;
+    }
 }

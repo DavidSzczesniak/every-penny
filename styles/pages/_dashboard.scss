@@ -3,6 +3,12 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        flex-direction: column;
+        margin-bottom: $sm-size;
+
+        @media (min-width: $tablet-breakpoint) {
+            flex-direction: row;
+        }
     }
 
     main {
@@ -12,6 +18,8 @@
 }
 
 .dashboard__header {
+    text-align: center;
+
     h2 {
         font-size: $font-lg;
         margin: 0;
@@ -22,6 +30,10 @@
 
     p {
         color: $grey;
+    }
+
+    @media (min-width: $tablet-breakpoint) {
+        text-align: left;
     }
 }
 
@@ -35,12 +47,21 @@
 .dashboard__stats {
     display: flex;
     justify-content: center;
+    flex-direction: column;
 
-    > div {
+    > .dashboard-section {
         width: 100%;
         display: flex;
         align-items: center;
-        margin: $sm-size;
+        margin-inline: 0;
+
+        @media (min-width: $tablet-breakpoint) {
+            margin: $sm-size;
+        }
+    }
+
+    @media (min-width: $tablet-breakpoint) {
+        flex-direction: row;
     }
 }
 
@@ -103,6 +124,8 @@
 .allocation-legend {
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 
     > div {
         margin-inline: $md-size;

@@ -1,18 +1,23 @@
 .content-header {
     display: flex;
     flex-direction: column;
+    margin-bottom: $lg-size;
 
     h1 {
-        margin-top: 0;
+        margin: 0;
+        align-self: center;
+        @media (max-width: $tablet-breakpoint) {
+            margin-bottom: $md-size;
+        }
+    }
+
+    button {
+        align-self: center;
     }
 
     @media (min-width: $tablet-breakpoint) {
         justify-content: space-between;
         flex-direction: row;
         align-items: center;
-
-        h1 {
-            margin: $sm-size 0;
-        }
     }
 }
