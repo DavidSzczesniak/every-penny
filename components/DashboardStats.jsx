@@ -1,7 +1,9 @@
 import { CollectionIcon, ShoppingCartIcon } from '@heroicons/react/solid';
+import { useDashboardStats } from 'hooks/useDashboardStats';
 import React from 'react';
 
 const DashboardStats = () => {
+    const { totalAmount, topCategory } = useDashboardStats();
     return (
         <div className="dashboard__stats">
             <div className="dashboard-section">
@@ -12,7 +14,7 @@ const DashboardStats = () => {
                             <ShoppingCartIcon width={35} height={35} />
                         </div>
                     </div>
-                    <p>$59.29</p>
+                    <p>${totalAmount}</p>
                     <p>
                         A change of <strong>34%</strong> since last month
                     </p>
@@ -26,7 +28,7 @@ const DashboardStats = () => {
                             <CollectionIcon width={35} height={35} />
                         </div>
                     </div>
-                    <p>Electronics</p>
+                    <p>{topCategory.name}</p>
                     <p>
                         Changed from <strong>Bills</strong> last month
                     </p>

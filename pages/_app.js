@@ -1,17 +1,24 @@
 import { MantineProvider } from '@mantine/core';
 import Navbar from 'components/Navbar';
 import Sidebar from 'components/Sidebar';
-import { ExpensesContext, expensesReducer, initialExpensesState } from 'context/expensesContext';
+import { AuthProvider } from 'context/auth';
+import {
+    ExpensesContext,
+    expensesReducer,
+    filtersReducer,
+    initialExpensesState,
+} from 'context/expensesContext';
 import { useRouter } from 'next/router';
 import React, { useReducer, useState } from 'react';
 import 'styles/styles.scss';
+import { reduceReducers } from 'utils/reduceReducers';
 import { disableScrolling, enableScrolling } from 'utils/utils';
-import { AuthProvider } from 'context/auth';
 
 function MyApp({ Component, pageProps }) {
     const [sidebarOpen, setSidebar] = useState(false);
     const router = useRouter();
-    const [state, dispatch] = useReducer(expensesReducer, initialExpensesState);
+    const rootReducer = reduceReducers(expensesReducer, filtersReducer);
+    const [state, dispatch] = useReducer(rootReducer, initialExpensesState);
 
     router.events &&
         router.events.on('routeChangeComplete', (url) => {
@@ -35,7 +42,7 @@ function MyApp({ Component, pageProps }) {
                 primaryColor: 'green',
             }}>
             <AuthProvider>
-                <ExpensesContext.Provider value={{ state, dispatch }}>
+                <ExpensesContext.Provider value={{ ...state, dispatch }}>
                     {sidebarOpen ? (
                         <Sidebar toggleSidebar={toggleSidebar} />
                     ) : (
