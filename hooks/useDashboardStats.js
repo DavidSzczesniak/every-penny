@@ -10,7 +10,6 @@ dayjs.extend(quarterOfYear);
 export const useDashboardStats = () => {
     const { filterByDateRange } = useFilters();
     const expenses = useFilteredExpenses();
-    console.log(expenses);
     const [period, setPeriod] = useState('30');
 
     useEffect(() => {

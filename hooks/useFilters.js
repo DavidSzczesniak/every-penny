@@ -19,7 +19,6 @@ export const useFilters = () => {
 
         if (value[0] && value[1]) {
             filter = value;
-            console.log('setting date range', value);
         }
         dispatch({ type: 'SET_DATE_RANGE_FILTER', filter });
         setDateRange(filter);
