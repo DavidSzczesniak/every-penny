@@ -83,14 +83,16 @@ export const useDashboardStats = () => {
                 allocation: a.allocation + b.allocation,
             })).allocation;
 
-            newAllocation = [
-                ...newAllocation,
-                {
-                    name: 'none',
-                    allocation: Number((100 - totalAllocation).toFixed(2)),
-                    color: getRandomColor(),
-                },
-            ];
+            if (100 - totalAllocation >= 1) {
+                newAllocation = [
+                    ...newAllocation,
+                    {
+                        name: 'none',
+                        allocation: Number((100 - totalAllocation).toFixed(2)),
+                        color: getRandomColor(),
+                    },
+                ];
+            }
         }
 
         return newAllocation;
