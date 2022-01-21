@@ -4,7 +4,7 @@ import { DateRangePicker } from '@mantine/dates';
 import { categories } from 'config/expensesConfig';
 import { useFilteredExpenses } from 'hooks/useFilteredExpenses';
 import { useFilters } from 'hooks/useFilters';
-import React from 'react';
+import React, { useEffect } from 'react';
 import ExpenseListTable from './ExpenseListTable';
 import LoadingScreen from './LoadingScreen';
 
@@ -18,6 +18,10 @@ const ExpenseList = ({ setCurrentExpense, isLoading }) => {
         filterByDateRange,
     } = useFilters();
     const allExpenses = useFilteredExpenses();
+
+    useEffect(() => {
+        filterByDateRange([null, null]);
+    }, []);
 
     return (
         <div className="expenses-list">
