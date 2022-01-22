@@ -1,12 +1,10 @@
 import { Select } from '@mantine/core';
 import { periodOptions } from 'config/dashboardConfig';
 import { useAuth } from 'context/auth';
-import { useDashboardStats } from 'hooks/useDashboardStats';
 import React from 'react';
 
-const DashboardHeader = () => {
+const DashboardHeader = ({ period, setPeriod }) => {
     const { user } = useAuth();
-    const { period, setPeriod } = useDashboardStats();
     const firstName = user?.name.split(' ')[0];
 
     return (

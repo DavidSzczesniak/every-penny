@@ -1,38 +1,9 @@
-import { periodOptions } from 'config/dashboardConfig';
-import dayjs from 'dayjs';
-import quarterOfYear from 'dayjs/plugin/quarterOfYear';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { getRandomColor } from 'utils/utils';
 import { useFilteredExpenses } from './useFilteredExpenses';
-import { useFilters } from './useFilters';
-dayjs.extend(quarterOfYear);
 
 export const useDashboardStats = () => {
-    const { filterByDateRange } = useFilters();
     const expenses = useFilteredExpenses();
-    const [period, setPeriod] = useState('30');
-
-    useEffect(() => {
-        let selectedPeriod = periodOptions.find((x) => x.value === period).value;
-
-        if (selectedPeriod === 'all') {
-            filterByDateRange([null, null]);
-        } else {
-            let periodUnit = 'month';
-            if (selectedPeriod === '7') {
-                periodUnit = 'week';
-            } else if (selectedPeriod === '90') {
-                periodUnit = 'quarter';
-            } else if (selectedPeriod === '365') {
-                periodUnit = 'year';
-            }
-            // @ts-ignore
-            const startDate = dayjs().startOf(periodUnit);
-            // @ts-ignore
-            const endDate = dayjs().endOf(periodUnit);
-            filterByDateRange([startDate, endDate]);
-        }
-    }, [period]);
 
     const totalAmount = useMemo(() => {
         let newTotal = 0;
@@ -110,8 +81,6 @@ export const useDashboardStats = () => {
     }
 
     return {
-        period,
-        setPeriod,
         totalAmount,
         topCategory,
         categoryAllocation,
