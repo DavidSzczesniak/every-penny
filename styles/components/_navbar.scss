@@ -52,10 +52,6 @@ div.navbar {
 }
 
 .navbar__button {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-
     @media (min-width: $tablet-breakpoint) {
         display: none;
     }

@@ -43,11 +43,8 @@ function MyApp({ Component, pageProps }) {
             }}>
             <AuthProvider>
                 <ExpensesContext.Provider value={{ ...state, dispatch }}>
-                    {sidebarOpen ? (
-                        <Sidebar toggleSidebar={toggleSidebar} />
-                    ) : (
-                        <Navbar toggleSidebar={toggleSidebar} />
-                    )}
+                    <Navbar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
+                    {sidebarOpen && <Sidebar />}
                     <div className="layout-wrapper">
                         <div className="content-container">
                             <Component {...pageProps} />

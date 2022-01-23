@@ -1,13 +1,15 @@
-import { CurrencyDollarIcon, MenuIcon } from '@heroicons/react/solid';
-import { Button } from '@mantine/core';
+import { CurrencyDollarIcon } from '@heroicons/react/solid';
+import { Burger, Button } from '@mantine/core';
 import { useAuth } from 'context/auth';
 import Link from 'next/link';
 import React from 'react';
 import { primaryButtonStyles } from 'utils/customButtonStyles';
 import NavUserInfo from './NavUserInfo';
 
-const Navbar = ({ toggleSidebar }) => {
+const Navbar = ({ sidebarOpen, toggleSidebar }) => {
     const { user, signinWithGoogle, signout } = useAuth();
+    const burgerTitle = sidebarOpen ? 'Close sidebar' : 'Open sidebar';
+
     return (
         <div className="navbar content-container">
             <Link href="/" passHref>
@@ -30,11 +32,12 @@ const Navbar = ({ toggleSidebar }) => {
                     </Button>
                 )}
             </div>
-            <div className="navbar__button">
-                <button className="icon-button" onClick={toggleSidebar}>
-                    <MenuIcon />
-                </button>
-            </div>
+            <Burger
+                className="navbar__button"
+                opened={sidebarOpen}
+                onClick={toggleSidebar}
+                title={burgerTitle}
+            />
         </div>
     );
 };
