@@ -6,7 +6,6 @@ import React, { useState } from 'react';
 
 const ExpensesListPage = () => {
     const [currentExpense, setCurrentExpense] = useState(undefined);
-    const [isLoading, setLoading] = useState(false);
     const { editExpense, removeExpense } = useExpensesContext();
 
     return (
@@ -20,7 +19,7 @@ const ExpensesListPage = () => {
                     onRemove={() => removeExpense(currentExpense.id)}
                 />
             )}
-            <ExpenseList setCurrentExpense={setCurrentExpense} isLoading={isLoading} />
+            <ExpenseList setCurrentExpense={setCurrentExpense} />
         </PageWrapper>
     );
 };

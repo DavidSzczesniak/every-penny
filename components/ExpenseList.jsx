@@ -6,9 +6,8 @@ import { useFilteredExpenses } from 'hooks/useFilteredExpenses';
 import { useFilters } from 'hooks/useFilters';
 import React, { useEffect } from 'react';
 import ExpenseListTable from './ExpenseListTable';
-import LoadingScreen from './LoadingScreen';
 
-const ExpenseList = ({ setCurrentExpense, isLoading }) => {
+const ExpenseList = ({ setCurrentExpense }) => {
     const {
         searchValue,
         dateRangeValue,
@@ -49,11 +48,7 @@ const ExpenseList = ({ setCurrentExpense, isLoading }) => {
                     onChange={(value) => filterByCategory(value)}
                 />
             </div>
-            {isLoading ? (
-                <LoadingScreen />
-            ) : (
-                <ExpenseListTable expenses={allExpenses} setCurrentExpense={setCurrentExpense} />
-            )}
+            <ExpenseListTable expenses={allExpenses} setCurrentExpense={setCurrentExpense} />
         </div>
     );
 };
