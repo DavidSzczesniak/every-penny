@@ -57,38 +57,21 @@
     justify-content: center;
     flex-direction: column;
 
-    > .dashboard-section {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        margin-inline: 0;
-
-        @media (min-width: $tablet-breakpoint) {
-            margin: $sm-size;
-        }
-    }
-
     @media (min-width: $tablet-breakpoint) {
         flex-direction: row;
     }
 }
 
-.stat-text {
+.stat-box {
     width: 100%;
+    margin-inline: 0;
 
-    > p:nth-child(2) {
-        font-weight: 600;
-        font-size: 3rem;
-        margin: $sm-size 0;
-    }
-
-    > p:last-child {
-        color: $grey;
-        overflow-wrap: break-word;
+    @media (min-width: $tablet-breakpoint) {
+        margin: $sm-size;
     }
 }
 
-.stat-text__title {
+.stat-box__title {
     display: flex;
     justify-content: space-between;
 
@@ -105,6 +88,17 @@
     svg {
         fill: $green;
     }
+}
+
+.stat-box__result {
+    font-weight: 600;
+    font-size: 3rem;
+    margin: $sm-size 0;
+}
+
+.stat-box__change {
+    color: $grey;
+    overflow-wrap: break-word;
 }
 
 .allocation-bar {
