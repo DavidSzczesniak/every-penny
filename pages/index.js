@@ -22,12 +22,7 @@ export default function Home() {
                         <span>budget</span>!
                     </h1>
                     <div className="homepage__image">
-                        <Image
-                            src="/pixeltrue-money-jar.png"
-                            alt="money jar"
-                            width={225}
-                            height={350}
-                        />
+                        <Image src="/pixeltrue-pig.png" alt="piggy bank" width={300} height={275} />
                     </div>
                 </div>
                 <div className="homepage__tagline">

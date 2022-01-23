@@ -30,12 +30,11 @@
     display: flex;
     justify-content: center;
     margin: $lg-size 0;
-    flex: 1;
 
     @media (min-width: $tablet-breakpoint) {
         img {
-            height: 410px !important;
-            width: 275px !important;
+            height: 375px !important;
+            width: 400px !important;
         }
     }
 
@@ -43,8 +42,8 @@
         margin: 0;
 
         img {
-            height: 550px !important;
-            width: 350px !important;
+            height: 475px !important;
+            width: 500px !important;
         }
     }
 }
@@ -55,7 +54,7 @@
 
     @media (min-width: $desktop-breakpoint) {
         text-align: left;
-        margin-top: -20rem;
+        margin-top: -12rem;
 
         p {
             width: 50%;
