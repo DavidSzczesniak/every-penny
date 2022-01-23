@@ -1,23 +1,8 @@
-.expense-modal__title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    h3 {
-        margin: 0;
-    }
-
-    .icon-button svg {
-        width: 2rem;
-        height: 2rem;
-    }
-}
-
 .expense-modal__body {
     display: flex;
     flex-direction: column;
 
-    > * {
+    > *:not(:first-child) {
         margin-top: $sm-size;
     }
 

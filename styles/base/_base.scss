@@ -47,3 +47,9 @@ a.active {
     background: white;
     border-bottom-left-radius: 50%;
 }
+
+// overwriting global mantine styles
+.mantine-Modal-title {
+    font-weight: bold;
+    font-size: $font-md;
+}

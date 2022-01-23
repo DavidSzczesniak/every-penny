@@ -44,19 +44,15 @@ const ExpenseModal = ({ opened, setOpened, onSubmit, expenseData = null, onRemov
         resetModal();
     };
 
+    const modalTitle = expenseData ? 'Edit Expense' : 'Add New Expense';
+
     return (
         <Modal
             className="expense-modal"
             opened={opened}
             onClose={() => setOpened(false)}
             radius="lg"
-            hideCloseButton>
-            <div className="expense-modal__title">
-                <h3>{`${expenseData ? 'Edit Expense' : 'Add New Expense'}`}</h3>
-                <button className="icon-button" onClick={() => setOpened(false)}>
-                    <XIcon />
-                </button>
-            </div>
+            title={modalTitle}>
             <form
                 className="expense-modal__body"
                 onSubmit={form.onSubmit((values) => handleSubmit(values))}>
