@@ -100,9 +100,11 @@ export const useDashboardStats = (period) => {
     }, [filteredExpenses]);
 
     function getArrayPropTotal(array, prop) {
-        return array.reduce((a, b) => ({
+        const total = array.reduce((a, b) => ({
             [prop]: a[prop] + b[prop],
         }))[prop];
+
+        return Number(total.toFixed(2));
     }
 
     function getPreviousPeriodExpenses() {
