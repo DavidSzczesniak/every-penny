@@ -11,7 +11,7 @@ const mockFn = () => jest.fn();
 it('should render the basic fields', () => {
     render(<ExpenseModal opened={true} setOpened={mockFn} onSubmit={mockFn} />);
 
-    expect(screen.getByRole('heading', { name: /Add New Expense/ })).toBeInTheDocument();
+    expect(screen.getByRole('dialog', { name: /Add New Expense/ })).toBeInTheDocument();
     expect(screen.getByRole('textbox', { name: /Title \*/ })).toBeInTheDocument();
     expect(screen.getByRole('textbox', { name: /Amount \*/ })).toBeInTheDocument();
     expect(screen.getByRole('textbox', { name: /Date/ })).toBeInTheDocument();
@@ -31,7 +31,7 @@ it('should render with given expense data', () => {
         />
     );
 
-    expect(screen.getByRole('heading', { name: /Edit Expense/ })).toBeInTheDocument();
+    expect(screen.getByRole('dialog', { name: /Edit Expense/ })).toBeInTheDocument();
     expect(screen.getByDisplayValue(expenseData.title)).toBeInTheDocument();
     const formattedDate = dayjs(expenseData.createdAt).format('MMMM D, YYYY');
     expect(screen.getByDisplayValue(formattedDate)).toBeInTheDocument();

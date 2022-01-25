@@ -1,13 +1,24 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import ExpenseList from 'components/ExpenseList';
+import { ExpensesContext } from 'context/expensesContext';
 import React from 'react';
 import { mockExpenses } from '../../__mocks__/expenses';
 import '../../__mocks__/ResizeObserver';
 
-const renderComponent = (isLoading = false) => {
+const mockDispatch = jest.fn();
+const renderComponent = () => {
+    const defaults = {
+        allExpenses: mockExpenses,
+        textFilter: '',
+        dateRangeFilter: [null, null],
+        categoryFilter: '',
+        dispatch: mockDispatch,
+    };
     render(
-        <ExpenseList expenses={mockExpenses} setCurrentExpense={() => {}} isLoading={isLoading} />
+        <ExpensesContext.Provider value={{ ...defaults }}>
+            <ExpenseList setCurrentExpense={() => {}} />
+        </ExpensesContext.Provider>
     );
 };
 
@@ -20,29 +31,31 @@ it('should render with basic props', () => {
     expect(screen.getByRole('textbox', { name: 'Select category' })).toBeInTheDocument();
 });
 
-it('should render the loading spinner', () => {
-    renderComponent(true);
+// it('should render the loading spinner', () => {
+//     renderComponent(true);
 
-    expect(screen.getByRole('img', { name: 'loading spinner' })).toBeInTheDocument();
-    expect(screen.queryByRole('table')).not.toBeInTheDocument();
-});
+//     expect(screen.getByRole('img', { name: 'loading spinner' })).toBeInTheDocument();
+//     expect(screen.queryByRole('table')).not.toBeInTheDocument();
+// });
 
-it('should filter by title', () => {
+it('should dispatch text filter', () => {
     renderComponent();
+    const searchString = 'headphones';
 
-    expect(screen.getAllByRole('row').length).toBe(11);
-    userEvent.type(screen.getByRole('textbox', { name: 'Search' }), 'Headphones');
-    expect(screen.getAllByRole('row').length).toBe(2);
-    expect(screen.getAllByRole('cell')[1]).toHaveTextContent(mockExpenses[2].title);
+    userEvent.type(screen.getByRole('textbox', { name: 'Search' }), searchString);
+    expect(mockDispatch).toHaveBeenCalledWith({ type: 'SET_TEXT_FILTER', filter: searchString });
 });
 
 it('should filter by category', async () => {
     renderComponent();
+    const searchOption = 'Electronics';
 
-    expect(screen.getAllByRole('row').length).toBe(11);
     userEvent.click(screen.getByRole('textbox', { name: 'Select category' }));
-    userEvent.click(screen.getByRole('option', { name: 'Electronics' }));
-    const allTableRows = await screen.findAllByRole('row');
-    expect(allTableRows.length).toBe(2);
-    expect(screen.getAllByRole('cell')[1]).toHaveTextContent(mockExpenses[2].title);
+    userEvent.click(screen.getByRole('option', { name: searchOption }));
+    await waitFor(() => {
+        expect(mockDispatch).toHaveBeenCalledWith({
+            type: 'SET_CATEGORY_FILTER',
+            filter: searchOption,
+        });
+    });
 });
