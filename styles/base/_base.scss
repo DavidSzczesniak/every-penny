@@ -10,7 +10,7 @@ html {
 
 body {
     font-family: 'Poppins', sans-serif;
-    font-size: $md-size;
+    font-size: $font-sm;
     line-height: 1.6;
     margin: 0;
     background: $neon-green;
@@ -52,4 +52,11 @@ a.active {
 .mantine-Modal-title {
     font-weight: bold;
     font-size: $font-md;
+}
+
+.mantine-Button-root {
+    @media (max-width: ($tablet-breakpoint - 1)) {
+        width: 100%;
+        max-width: 30rem;
+    }
 }

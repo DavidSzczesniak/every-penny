@@ -77,7 +77,7 @@
 
     h3 {
         font-weight: 500;
-        font-size: 1.6rem;
+        font-size: $font-sm;
         margin-bottom: 0;
     }
 }
@@ -92,7 +92,7 @@
 
 .stat-box__result {
     font-weight: 600;
-    font-size: 3rem;
+    font-size: $font-lg;
     margin: $sm-size 0;
 }
 
