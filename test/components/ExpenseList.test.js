@@ -46,7 +46,7 @@ it('should dispatch text filter', () => {
     expect(mockDispatch).toHaveBeenCalledWith({ type: 'SET_TEXT_FILTER', filter: searchString });
 });
 
-it('should filter by category', async () => {
+it('should dispatch category filter', async () => {
     renderComponent();
     const searchOption = 'Electronics';
 
