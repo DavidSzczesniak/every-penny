@@ -22,10 +22,17 @@ const renderComponent = (defaultExpenses = mockExpenses) => {
     );
 };
 
+jest.mock('react-chartjs-2', () => ({
+    Bar: () => null,
+}));
+
 it('should render with basic props', () => {
     renderComponent();
     expect(screen.getByRole('heading', { name: 'Total expenses' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Top category' })).toBeInTheDocument();
+    expect(
+        screen.getByRole('heading', { name: 'Expenditure over the time period' })
+    ).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Allocation' })).toBeInTheDocument();
 });
 

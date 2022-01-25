@@ -29,7 +29,7 @@ const Dashboard = () => {
                     <DashboardHeader period={period} setPeriod={setPeriod} />
                     <main>
                         <DashboardStats period={period} />
-                        {/* <DashboardChart period={period} /> */}
+                        <DashboardChart period={period} />
                         <DashboardAllocation />
                     </main>
                 </>
