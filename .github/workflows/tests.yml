@@ -3,6 +3,7 @@ on:
     push:
         branches: [main, master]
     pull_request:
+        branches: [main, master]
 
 env:
   NEXT_PUBLIC_FIREBASE_API_KEY: ${{secrets.FIREBASE_API_KEY}}
