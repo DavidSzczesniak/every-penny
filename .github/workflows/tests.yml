@@ -17,6 +17,7 @@ env:
 
 jobs:
     test:
+        environment: test
         timeout-minutes: 60
         runs-on: ubuntu-latest
         steps:
