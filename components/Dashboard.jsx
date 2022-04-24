@@ -1,7 +1,6 @@
 import DashboardAllocation from 'components/DashboardAllocation';
 import DashboardChart from 'components/DashboardChart';
 import DashboardHeader from 'components/DashboardHeader';
-import DashboardStats from 'components/DashboardStats';
 import { ExpensesContext } from 'context/expensesContext';
 import { useFilters } from 'hooks/useFilters';
 import React, { useEffect, useState } from 'react';
@@ -26,10 +25,9 @@ const Dashboard = () => {
         <div className="dashboard">
             {allExpenses.length > 0 ? (
                 <>
-                    <DashboardHeader period={period} setPeriod={setPeriod} />
+                    <DashboardHeader />
                     <main>
-                        <DashboardStats period={period} />
-                        <DashboardChart period={period} />
+                        <DashboardChart period={period} setPeriod={setPeriod} />
                         <DashboardAllocation />
                     </main>
                 </>

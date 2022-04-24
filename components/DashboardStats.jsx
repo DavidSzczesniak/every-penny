@@ -4,6 +4,7 @@ import { useDashboardStats } from 'hooks/useDashboardStats';
 import React from 'react';
 import variables from 'styles/base/_settings.module.scss';
 
+// todo: parking this, pick up later with ideas for more stats
 const DashboardStats = ({ period }) => {
     const { totalAmount, totalAmountChange, topCategory, topCategoryChange } =
         useDashboardStats(period);
@@ -44,16 +45,6 @@ const DashboardStats = ({ period }) => {
 
     return (
         <div className="dashboard__stats">
-            <div className="dashboard-section stat-box">
-                <div className="stat-box__title">
-                    <h3>Total expenses</h3>
-                    <div className="stat-icon">
-                        <ShoppingCartIcon width={35} height={35} />
-                    </div>
-                </div>
-                <p className="stat-box__result">${totalAmount}</p>
-                <AmountChange />
-            </div>
             <div className="dashboard-section stat-box">
                 <div className="stat-box__title">
                     <h3>Top category</h3>
