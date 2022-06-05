@@ -1,0 +1,56 @@
+.settings-box {
+	// todo: make some box helper class for this
+	// padding: $md-size $lg-size;
+    // border: 1px solid $clr-border;
+    // border-radius: 1.5rem;
+    // margin: $md-size 0;
+	p {
+		color: $grey;
+	}
+}
+
+.settings-box__header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+// todo: add mobile layout
+.categories-list {
+	list-style: none;
+	margin-top: $md-size;
+	padding: 0;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: $md-size;
+
+	li {
+		flex-basis: 50%;
+		display: flex;
+		justify-content: space-between;
+		border: 1px solid $clr-border;
+		border-radius: 1.5rem;
+		padding: $sm-size;
+		max-width: 35rem;
+		flex-wrap: wrap;
+		flex-shrink: 1;
+
+		&:hover {
+			background-color: lighten($grey, 55%);
+			cursor: pointer;
+		}
+	}
+}
+
+.category-color {
+	display: flex;
+	align-items: center;
+}
+
+.category-color__circle {
+	width: $md-size;
+	height: $md-size;
+	border-radius: 50%;
+	margin-left: $sm-size;
+}
