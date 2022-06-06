@@ -9,9 +9,15 @@ it('should render with basic props', () => {
     render(<PageWrapper title="Home">{mockChildren}</PageWrapper>);
 
     expect(screen.getByRole('heading', { name: /Home/ })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /Add New Expense/ })).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /Add New Expense/ })).not.toBeInTheDocument();
     // loading screen
     expect(screen.getByRole('presentation')).toBeInTheDocument();
+});
+
+it('should render with button on Expenses page', () => {
+    render(<PageWrapper title="Expenses List">{mockChildren}</PageWrapper>);
+
+    expect(screen.getByRole('button', { name: /Add New Expense/ })).toBeInTheDocument();
 });
 
 // todo: re-write and mock the auth context
@@ -21,10 +27,9 @@ it('should render with basic props', () => {
 //     // expect(screen.getByText('my homepage')).toBeInTheDocument();
 // });
 
-it('should open modal', () => {
-    render(<PageWrapper title="Home">{mockChildren}</PageWrapper>);
+it('should open Add New Expense modal', () => {
+    render(<PageWrapper title="Expenses List">{mockChildren}</PageWrapper>);
 
     userEvent.click(screen.getByRole('button', { name: /Add New Expense/i }));
-    expect(screen.getByRole('dialog')).toBeInTheDocument();
     expect(screen.getByRole('dialog', { name: /Add New Expense/ })).toBeInTheDocument();
 });

@@ -49,9 +49,11 @@ const PageWrapper = ({ title, children }) => {
             )}
             <div className="content-header">
                 <h1>{title}</h1>
-                <Button styles={primaryButtonStyles} onClick={() => setModalOpened(true)}>
-                    Add New Expense
-                </Button>
+                {title === 'Expenses List' && (
+                    <Button styles={primaryButtonStyles} onClick={() => setModalOpened(true)}>
+                        Add New Expense
+                    </Button>
+                )}
             </div>
             <div className="box-container">{isLoading ? <LoadingScreen /> : children}</div>
         </>
