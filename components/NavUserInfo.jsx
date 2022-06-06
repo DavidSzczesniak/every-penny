@@ -3,11 +3,16 @@ import { Popover, UnstyledButton } from '@mantine/core';
 import React, { Suspense, useState } from 'react';
 import PlaceholderAvatar from './PlaceholderAvatar';
 import { SuspenseImage } from './SuspenseImage';
-import Link from 'next/link';
+import router from 'next/router';
 
 const NavUserInfo = ({ user, signout }) => {
     const [opened, setOpened] = useState(false);
     const firstName = user.name.split(' ')[0];
+
+    const handleSignout = () => {
+        signout();
+        router.push('/');
+    };
 
     return (
         <>
@@ -34,10 +39,12 @@ const NavUserInfo = ({ user, signout }) => {
                 <div className="user-info-popover">
                     <ul>
                         <li>
-                            <Link href="/settings">Settings</Link>
+                            <UnstyledButton onClick={() => router.push('/settings')}>
+                                Settings
+                            </UnstyledButton>
                         </li>
-                        <li onClick={signout}>
-                            <Link href="/">Sign Out</Link>
+                        <li>
+                            <UnstyledButton onClick={handleSignout}>Sign Out</UnstyledButton>
                         </li>
                     </ul>
                 </div>

@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import NavUserInfo from 'components/NavUserInfo';
+jest.mock('next/router');
 
 const mockUser = {
     name: 'David Szczesniak',
@@ -24,15 +25,13 @@ it('should open popover', async () => {
     // wait for popover
     await screen.findByRole('dialog');
     expect(screen.getByRole('button', { name: /Sign Out/ })).toBeInTheDocument();
-    expect(screen.getByText(`Welcome, ${mockFirstName}!`)).toBeInTheDocument();
 });
 
 it('should call signout', async () => {
     render(<NavUserInfo user={mockUser} signout={signout} />);
 
     userEvent.click(screen.getByRole('button', { name: `placeholder avatar ${mockFirstName}` }));
-    // wait for popover
-    const signOutButton = await screen.findByRole('button', { name: /sign out/i });
+    const signOutButton = await screen.findByRole('button', { name: /Sign Out/ });
     userEvent.click(signOutButton);
 
     expect(signout).toHaveBeenCalled();
